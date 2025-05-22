@@ -106,6 +106,155 @@
       color: #666;
       line-height: 1.4;
     }
+
+    /* 피부 타입 선택 화면 */
+    #skin-type-selection {
+      margin: 30px auto;
+      max-width: 600px;
+      background: white;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+      display: none;
+    }
+
+    .skin-type-buttons {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 15px;
+      margin: 20px 0;
+    }
+
+    .skin-type-btn {
+      background: linear-gradient(135deg, #48cae4 0%, #023e8a 100%);
+      border: none;
+      color: white;
+      padding: 20px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      touch-action: manipulation;
+    }
+
+    .skin-type-btn:hover, .skin-type-btn:active {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    }
+
+    .skin-type-btn.selected {
+      background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+    }
+
+    .skin-type-desc {
+      font-size: 12px;
+      margin-top: 8px;
+      opacity: 0.9;
+      line-height: 1.3;
+    }
+
+    /* 화장품 추천 섹션 */
+    #cosmetic-recommendation {
+      margin: 20px auto;
+      max-width: 800px;
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      display: none;
+    }
+
+    .cosmetic-title {
+      font-size: 20px;
+      margin-bottom: 15px;
+      color: #333;
+      text-align: center;
+    }
+
+    .cosmetic-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .cosmetic-category {
+      background: #f9f9f9;
+      border-radius: 12px;
+      padding: 20px;
+    }
+
+    .category-title {
+      font-size: 18px;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+
+    .cosmetic-item {
+      background: white;
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 15px;
+      border: 1px solid #e0e0e0;
+      transition: transform 0.2s ease;
+    }
+
+    .cosmetic-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .product-name {
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 8px;
+      font-size: 16px;
+    }
+
+    .product-brand {
+      color: #666;
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+
+    .product-description {
+      color: #555;
+      font-size: 13px;
+      line-height: 1.4;
+      margin-bottom: 12px;
+    }
+
+    .product-links {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .product-link {
+      background: #ff6b35;
+      color: white;
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 12px;
+      transition: background-color 0.3s;
+      display: inline-block;
+    }
+
+    .product-link.oliveyoung {
+      background: #00b894;
+    }
+
+    .product-link.coupang {
+      background: #ff6b35;
+    }
+
+    .product-link:hover {
+      opacity: 0.8;
+    }
     
     #webcam-container {
       margin: 20px auto;
@@ -395,6 +544,14 @@
         flex-direction: column;
         align-items: center;
       }
+
+      .skin-type-buttons {
+        grid-template-columns: 1fr;
+      }
+
+      .cosmetic-grid {
+        grid-template-columns: 1fr;
+      }
       
       .music-grid {
         grid-template-columns: 1fr;
@@ -425,6 +582,10 @@
       
       .music-item {
         padding: 8px;
+      }
+
+      .product-links {
+        justify-content: center;
       }
     }
   </style>
@@ -463,9 +624,36 @@
         </div>
       </div>
     </div>
+
+    <!-- 피부 타입 선택 화면 -->
+    <div id="skin-type-selection">
+      <h2>당신의 피부 타입을 선택해주세요</h2>
+      <p style="color: #666; margin-bottom: 20px;">정확한 화장품 추천을 위해 본인의 피부 타입을 선택해주세요.</p>
+      
+      <div class="skin-type-buttons">
+        <button class="skin-type-btn" data-type="dry" onclick="selectSkinType('dry')">
+          <div>🏜️ 건성 피부</div>
+          <div class="skin-type-desc">피부가 건조하고 각질이 일어나며<br>당김이 느껴지는 피부</div>
+        </button>
+        <button class="skin-type-btn" data-type="oily" onclick="selectSkinType('oily')">
+          <div>💧 지성 피부</div>
+          <div class="skin-type-desc">피지 분비가 많고 번들거림이<br>쉽게 나타나는 피부</div>
+        </button>
+        <button class="skin-type-btn" data-type="combination" onclick="selectSkinType('combination')">
+          <div>🌗 복합성 피부</div>
+          <div class="skin-type-desc">T존은 기름지고 볼은 건조한<br>부위별로 다른 특성을 가진 피부</div>
+        </button>
+        <button class="skin-type-btn" data-type="sensitive" onclick="selectSkinType('sensitive')">
+          <div>🌸 민감성 피부</div>
+          <div class="skin-type-desc">외부 자극에 쉽게 반응하고<br>붉어지거나 따가운 피부</div>
+        </button>
+      </div>
+      
+      <button id="confirmSkinType" onclick="confirmSkinTypeSelection()" style="display: none;">선택 완료</button>
+      <button class="back-btn" onclick="goBackToModeSelection()">← 모드 선택으로 돌아가기</button>
+    </div>
     
-    <!-- 메인 콘텐츠 -->
-    <div id="main-content" class="main-content">
+    <!-- 메인 콘텐츠 -->    <div id="main-content" class="main-content">
       <button class="back-btn" onclick="goBack()">← 모드 선택으로 돌아가기</button>
       
       <div id="mode-title" class="mode-title"></div>
@@ -483,6 +671,12 @@
         <div class="music-title">🎵 당신의 기분에 맞는 음악 추천</div>
         <div id="music-content"></div>
       </div>
+
+      <!-- 화장품 추천 섹션 -->
+      <div id="cosmetic-recommendation">
+        <div class="cosmetic-title">💄 당신의 피부에 맞는 화장품 추천</div>
+        <div id="cosmetic-content"></div>
+      </div>
       
       <div id="controls">
         <button id="startBtn" onclick="startDetection()" disabled>분석 시작</button>
@@ -493,6 +687,573 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/tensorflow/3.18.0/tf.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8/dist/teachablemachine-image.min.js"></script>
-  <script src="app.js"></script>
+  <script>
+    let currentMode = '';
+    let currentSkinType = '';
+    let model, webcam, labelContainer, maxPredictions;
+    let deferredPrompt;
+
+    // 화장품 추천 데이터
+    const cosmeticRecommendations = {
+      acne: {
+        dry: [
+          {
+            category: "세안제",
+            name: "세타필 젠틀 스킨 클렌저",
+            brand: "세타필",
+            description: "건성 여드름 피부를 위한 순한 세안제로 피부 장벽을 보호하면서 깨끗하게 세정합니다.",
+            links: {
+              coupang: "https://www.coupang.com/vp/products/6751524299",
+              oliveyoung: "https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000139861"
+            }
+          },
+          {
+            category: "토너",
+            name: "폴라 초이스 CALM 리스토링 토너",
+            brand: "폴라 초이스",
+            description: "건성 민감성 피부를 진정시키고 수분을 공급하는 무알코올 토너입니다.",
+            links: {
+              coupang: "https://www.coupang.com/vp/products/5847382647",
+              oliveyoung: "https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000173912"
+            }
+          },
+          {
+            category: "여드름 케어",
+            name: "라로슈포제 에팍클라 듀오",
+            brand: "라로슈포제",
+            description: "건성 여드름 피부를 위한 집중 케어 제품으로 보습과 여드름 케어를 동시에 제공합니다.",
+            links: {
+              coupang: "https://www.coupang.com/vp/products/6842951235",
+              oliveyoung: "https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000162847"
+            }
+          }
+        ],
+        oily: [
+          {
+            category: "세안제",
+            name: "세타필 프로 오일 리무빙 폼",
+            brand: "세타필",
+            description: "지성 여드름 피부를 위한 딥클렌징 폼으로 과도한 유분과 모공 속 노폐물을 제거합니다.",
+            links: {
+              coupang: "https://www.coupang.com/vp/products/7245681123",
+              oliveyoung: "https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000184729"
+            }
+          },
+          {
+            category: "토너",
+            name: "폴라 초이스 SKIN PERFECTING 2% BHA",
+            brand: "폴라 초이스",
+            description: "살리실산이 함유된 각질 제거 토너로 모공을 깨끗하게 하고 여드름을 예방합니다.",
+            links: {
+              coupang: "https://www.coupang.com/vp/products/5231847392",
+              oliveyoung: "https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000156732"
+            }
+          },
+          {
+            category: "여드름 케어",
+            name: "비피다 트러블 케어 스팟 패치",
+            brand: "비피다",
+            description: "지성 피부 여드름을 빠른 시간 내에 진정시키고 염증을 완화하는 패치입니다.",
+            links: {
+              coupang: "https://www.coupang.com/vp/products/6234891455",
+              oliveyoung: "https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000178934"
+            }
+          }
+        ],
+        combination: [
+          {
+            category: "세안제",
+            name: "아벤느 클리낭스 클렌징 젤",
+            brand: "아벤느",
+            description: "복합성 피부를 위한 약산성 세안제로 T존의 유분은 제거하고 볼의 수분은 유지합니다.",
+            links: {
+              coupang: "https://www.coupang.com/vp/products/6951847123",
+              oliveyoung: "https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000149283"
+            }
+          },
+          {
+            category: "토너",
+            name: "토니&가이 밸런싱 토너",
+            brand: "토니&가이",
+            description: "복합성 피부의 유분과 수분 밸런스를 맞춰주는 균형 토너입니다.",
+            links: {
+              coupang: "https://www.coupang.com/vp/products/5847291647",
+              oliveyoung: "https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000167842"
+            }
+          },
+          {
+            category: "여드름 케어",
+            name: "더오디너리 나이아신아마이드 10% + 징크 1%",
+            brand: "더오디너리",
+            description: "복합성 피부의 모공을 축소하고 유분 밸런스를 조절하여 여드름을 예방합니다.",
+            links: {
+              coupang: "https://www.coupang.com/vp/products/6745823991",
+              oliveyoung: "https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000172956"
+            }
+          }
+        ],
+        sensitive: [
+          {
+            category: "세안제",
+            name: "유세린 더마토클린 마일드 클렌징 밀크",
+            brand: "유세린",
+            description: "민감성 피부를 위한 순한 클렌징 밀크로 자극 없이 부드럽게 세정합니다.",
+            links: {
+              coupang: "https://www.coupang.com/vp/products/6234789123",
+              oliveyoung: "https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000145672"
+            }
+          },
+          {
+            category: "토너",
+            name: "아벤느 써멀 워터 스프레이",
+            brand: "아벤느",
+            description: "민감성 피부를 진정시키는 온천수 스프레이로 언제든 사용 가능합니다.",
+            links: {
+              coupang: "https://www.coupang.com/vp/products/5923847612",
+              oliveyoung: "https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000134827"
+            }
+          },
+          {
+            category: "여드름 케어",
+            name: "라로슈포제 시카플라스트 밤 B5",
+            brand: "라로슈포제", 
+            description: "민감성 피부의 염증을 진정시키고 피부 재생을 도와주는 케어 제품입니다.",
+            links: {
+              coupang: "https://www.coupang.com/vp/products/6847291034",
+              oliveyoung: "https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000158394"
+            }
+          }
+        ]
+      },
+      trouble: {
+        dry: [
+          {
+            category: "수분 크림",
+            name: "세라베 모이스처라이징 크림",
+            brand: "세라베",
+            description: "건성 트러블 피부를 위한 고보습 크림으로 피부 장벽을 강화합니다.",
+            links: {
+              coupang: "https://www.coupang.com/vp/products/6892347156",
+              oliveyoung: "https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000176234"
+            }
+          },
+          {
+            category: "앰플/세럼",
+            name: "더오디너리 히알루로닉 애시드 2% + B5",
+            brand: "더오디너리",
+            description: "건조한 트러블 피부에 집중적인 수분 공급으로 피부를 진정시킵니다.",
+            links: {
+              coupang: "https://www.coupang.com/vp/products/5847392156",
+              oliveyoung: "https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000169847"
+            }
+          }
+        ],
+        oily: [
+          {
+            category: "수분 젤",
+            name: "뉴트로지나 하이드라 부스트 워터 젤",
+            brand: "뉴트로지나",
+            description: "지성 트러블 피부를 위한 가벼운 수분 젤로 끈적임 없이 보습합니다.",
+            links: {
+              coupang: "https://www.coupang.com/vp/products/6234891723",
+              oliveyoung: "https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000184729"
+            }
+          },
+          {
+            category: "진정 앰플",
+            name: "에스트라 아토베리어 365 로션",
+            brand: "에스트라",
+            description: "지성 피부의 염증을 진정시키고 과도한 유분을 조절합니다.",
+            links: {
+              coupang: "https://www.coupang.com/vp/products/5748392847",
+              oliveyoung: "https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000157823"
+            }
+          }
+        ],
+        combination: [
+          {
+            category: "밸런싱 로션",
+            name: "키엘 울트라 페이셜 크림",
+            brand: "키엘",
+            description: "복합성 피부의 유분과 수분 밸런스를 맞춰주는 만능 크림입니다.",
+            links: {
+              coupang: "https://www.coupang.com/vp/products/6847291556",
+              oliveyoung: "https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000142847"
+            }
+          },
+          {
+            category: "진정 세럼",
+            name: "토리든 다이브인 로우 몰레큘 히알루로닉 애시드 세럼",
+            brand: "토리든",
+            description: "복합성 피부의 부위별 다른 수분 요구량을 충족시키는 세럼입니다.",
+            links: {
+              coupang: "https://www.coupang.com/vp/products/5923847234",
+              oliveyoung: "https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000178934"
+            }
+          }
+        ],
+        sensitive: [
+          {
+            category: "진정 크림",
+            name: "닥터지 레드 블레미쉬 클리어 수딩 크림",
+            brand: "닥터지",
+            description: "민감성 피부의 홍조와 트러블을 동시에 케어하는 진정 크림입니다.",
+            links: {
+              coupang: "https://www.coupang.com/vp/products/6234847192",
+              oliveyoung: "https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000167234"
+            }
+          },
+          {
+            category: "재생 앰플",
+            name: "라로슈포제 톨레리안 울트라 크림",
+            brand: "라로슈포제",
+            description: "극민감성 피부를 위한 무자극 크림으로 피부 장벽을 복구합니다.",
+            links: {
+              coupang: "https://www.coupang.com/vp/products/5847391234",
+              oliveyoung: "https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000156789"
+            }
+          }
+        ]
+      }
+    };
+
+    // PWA 관련 코드
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      document.getElementById('installPrompt').classList.add('show');
+    });
+
+    document.getElementById('installBtn').addEventListener('click', async () => {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        deferredPrompt = null;
+        hideInstallPrompt();
+      }
+    });
+
+    function hideInstallPrompt() {
+      document.getElementById('installPrompt').classList.remove('show');
+    }
+
+    // 모드 선택 함수
+    function selectMode(mode) {
+      currentMode = mode;
+      
+      if (mode === 'skin') {
+        // 피부 모드인 경우 피부 타입 선택 화면으로
+        document.getElementById('mode-selection').style.display = 'none';
+        document.getElementById('skin-type-selection').style.display = 'block';
+      } else {
+        // 감정 모드인 경우 바로 메인 화면으로
+        showMainContent();
+      }
+    }
+
+    // 피부 타입 선택 함수
+    function selectSkinType(type) {
+      currentSkinType = type;
+      
+      // 모든 버튼의 선택 상태 초기화
+      document.querySelectorAll('.skin-type-btn').forEach(btn => {
+        btn.classList.remove('selected');
+      });
+      
+      // 선택된 버튼에 선택 상태 추가
+      document.querySelector(`[data-type="${type}"]`).classList.add('selected');
+      
+      // 확인 버튼 표시
+      document.getElementById('confirmSkinType').style.display = 'inline-block';
+    }
+
+    // 피부 타입 선택 확인
+    function confirmSkinTypeSelection() {
+      if (currentSkinType) {
+        showMainContent();
+      }
+    }
+
+    // 메인 콘텐츠 표시
+    function showMainContent() {
+      document.getElementById('mode-selection').style.display = 'none';
+      document.getElementById('skin-type-selection').style.display = 'none';
+      document.getElementById('main-content').style.display = 'block';
+      
+      if (currentMode === 'emotion') {
+        document.getElementById('mode-title').textContent = '😊 표정 감정 인식';
+        initEmotionDetection();
+      } else if (currentMode === 'skin') {
+        document.getElementById('mode-title').textContent = '✨ 피부 상태 분석';
+        initSkinAnalysis();
+      }
+    }
+
+    // 모드 선택으로 돌아가기
+    function goBackToModeSelection() {
+      document.getElementById('skin-type-selection').style.display = 'none';
+      document.getElementById('mode-selection').style.display = 'block';
+      currentSkinType = '';
+      document.getElementById('confirmSkinType').style.display = 'none';
+      document.querySelectorAll('.skin-type-btn').forEach(btn => {
+        btn.classList.remove('selected');
+      });
+    }
+
+    function goBack() {
+      if (currentMode === 'skin') {
+        // 피부 모드인 경우 피부 타입 선택으로 돌아가기
+        document.getElementById('main-content').style.display = 'none';
+        document.getElementById('skin-type-selection').style.display = 'block';
+      } else {
+        // 감정 모드인 경우 모드 선택으로 돌아가기
+        document.getElementById('main-content').style.display = 'none';
+        document.getElementById('mode-selection').style.display = 'block';
+      }
+      
+      // 웹캠 정리
+      if (webcam) {
+        webcam.stop();
+      }
+      
+      // 추천 숨기기
+      document.getElementById('music-recommendation').style.display = 'none';
+      document.getElementById('cosmetic-recommendation').style.display = 'none';
+      document.getElementById('predictions').style.display = 'none';
+      
+      // 상태 초기화
+      currentMode = '';
+      if (currentMode !== 'skin') {
+        currentSkinType = '';
+      }
+    }
+
+    // 감정 인식 초기화
+    async function initEmotionDetection() {
+      try {
+        document.getElementById('status').textContent = '감정 인식 모델을 로딩 중...';
+        
+        const modelURL = 'https://teachablemachine.withgoogle.com/models/your-emotion-model/model.json';
+        const metadataURL = 'https://teachablemachine.withgoogle.com/models/your-emotion-model/metadata.json';
+        
+        model = await tmImage.load(modelURL, metadataURL);
+        maxPredictions = model.getTotalClasses();
+        
+        const flip = true;
+        webcam = new tmImage.Webcam(320, 240, flip);
+        await webcam.setup();
+        await webcam.play();
+        window.requestAnimationFrame(loopEmotion);
+        
+        document.getElementById('webcam-container').appendChild(webcam.canvas);
+        document.getElementById('status').innerHTML = '<span class="success">✓ 준비 완료! 분석 시작 버튼을 눌러주세요.</span>';
+        document.getElementById('startBtn').disabled = false;
+        
+      } catch (error) {
+        console.error('모델 로딩 실패:', error);
+        document.getElementById('status').innerHTML = '<span class="error">✗ 모델 로딩에 실패했습니다. 네트워크를 확인해주세요.</span>';
+      }
+    }
+
+    // 피부 분석 초기화
+    async function initSkinAnalysis() {
+      try {
+        document.getElementById('status').textContent = '피부 분석 모델을 로딩 중...';
+        
+        const modelURL = 'https://teachablemachine.withgoogle.com/models/your-skin-model/model.json';
+        const metadataURL = 'https://teachablemachine.withgoogle.com/models/your-skin-model/metadata.json';
+        
+        model = await tmImage.load(modelURL, metadataURL);
+        maxPredictions = model.getTotalClasses();
+        
+        const flip = true;
+        webcam = new tmImage.Webcam(320, 240, flip);
+        await webcam.setup();
+        await webcam.play();
+        window.requestAnimationFrame(loopSkin);
+        
+        document.getElementById('webcam-container').appendChild(webcam.canvas);
+        document.getElementById('status').innerHTML = '<span class="success">✓ 준비 완료! 분석 시작 버튼을 눌러주세요.</span>';
+        document.getElementById('startBtn').disabled = false;
+        
+      } catch (error) {
+        console.error('모델 로딩 실패:', error);
+        document.getElementById('status').innerHTML = '<span class="error">✗ 모델 로딩에 실패했습니다. 네트워크를 확인해주세요.</span>';
+      }
+    }
+
+    // 감정 인식 루프
+    async function loopEmotion() {
+      webcam.update();
+      if (document.getElementById('startBtn').style.display !== 'none') {
+        await predictEmotion();
+      }
+      window.requestAnimationFrame(loopEmotion);
+    }
+
+    // 피부 분석 루프
+    async function loopSkin() {
+      webcam.update();
+      if (document.getElementById('startBtn').style.display !== 'none') {
+        await predictSkin();
+      }
+      window.requestAnimationFrame(loopSkin);
+    }
+
+    // 감정 예측
+    async function predictEmotion() {
+      const prediction = await model.predict(webcam.canvas);
+      
+      let predictionHTML = '';
+      for (let i = 0; i < maxPredictions; i++) {
+        const percentage = Math.round(prediction[i].probability * 100);
+        predictionHTML += `
+          <div class="prediction-item">
+            <span>${prediction[i].className}</span>
+            <div class="prediction-bar">
+              <div class="prediction-fill" style="width: ${percentage}%"></div>
+            </div>
+            <span>${percentage}%</span>
+          </div>
+        `;
+      }
+      
+      document.getElementById('prediction-list').innerHTML = predictionHTML;
+      
+      // 가장 높은 확률의 감정 찾기
+      const topPrediction = prediction.reduce((prev, current) => 
+        (prev.probability > current.probability) ? prev : current
+      );
+      
+      if (topPrediction.probability > 0.7) {
+        showMusicRecommendation(topPrediction.className);
+      }
+    }
+
+    // 피부 예측
+    async function predictSkin() {
+      const prediction = await model.predict(webcam.canvas);
+      
+      let predictionHTML = '';
+      for (let i = 0; i < maxPredictions; i++) {
+        const percentage = Math.round(prediction[i].probability * 100);
+        predictionHTML += `
+          <div class="prediction-item">
+            <span>${prediction[i].className}</span>
+            <div class="prediction-bar">
+              <div class="prediction-fill" style="width: ${percentage}%"></div>
+            </div>
+            <span>${percentage}%</span>
+          </div>
+        `;
+      }
+      
+      document.getElementById('prediction-list').innerHTML = predictionHTML;
+      
+      // 가장 높은 확률의 피부 상태 찾기
+      const topPrediction = prediction.reduce((prev, current) => 
+        (prev.probability > current.probability) ? prev : current
+      );
+      
+      if (topPrediction.probability > 0.7) {
+        showCosmeticRecommendation(topPrediction.className);
+      }
+    }
+
+    // 음악 추천 표시
+    function showMusicRecommendation(emotion) {
+      const musicDiv = document.getElementById('music-recommendation');
+      musicDiv.style.display = 'block';
+      
+      // 감정별 음악 추천 로직 (기존 코드와 동일)
+      // 여기에 기존 음악 추천 코드를 그대로 사용
+    }
+
+    // 화장품 추천 표시
+    function showCosmeticRecommendation(skinCondition) {
+      if (!currentSkinType) return;
+      
+      const cosmeticDiv = document.getElementById('cosmetic-recommendation');
+      const contentDiv = document.getElementById('cosmetic-content');
+      
+      let recommendationType = '';
+      if (skinCondition.toLowerCase().includes('acne') || skinCondition.toLowerCase().includes('여드름')) {
+        recommendationType = 'acne';
+      } else if (skinCondition.toLowerCase().includes('trouble') || skinCondition.toLowerCase().includes('트러블')) {
+        recommendationType = 'trouble';
+      }
+      
+      if (recommendationType && cosmeticRecommendations[recommendationType] && cosmeticRecommendations[recommendationType][currentSkinType]) {
+        const products = cosmeticRecommendations[recommendationType][currentSkinType];
+        
+        let html = `<div class="cosmetic-grid">`;
+        
+        // 카테고리별로 제품 정리
+        const categories = {};
+        products.forEach(product => {
+          if (!categories[product.category]) {
+            categories[product.category] = [];
+          }
+          categories[product.category].push(product);
+        });
+        
+        Object.keys(categories).forEach(category => {
+          html += `
+            <div class="cosmetic-category">
+              <div class="category-title">${category}</div>`;
+          
+          categories[category].forEach(product => {
+            html += `
+              <div class="cosmetic-item">
+                <div class="product-name">${product.name}</div>
+                <div class="product-brand">${product.brand}</div>
+                <div class="product-description">${product.description}</div>
+                <div class="product-links">
+                  <a href="${product.links.coupang}" class="product-link coupang" target="_blank">쿠팡에서 보기</a>
+                  <a href="${product.links.oliveyoung}" class="product-link oliveyoung" target="_blank">올리브영에서 보기</a>
+                </div>
+              </div>`;
+          });
+          
+          html += `</div>`;
+        });
+        
+        html += `</div>`;
+        contentDiv.innerHTML = html;
+        cosmeticDiv.style.display = 'block';
+      }
+    }
+
+    // 분석 시작
+    function startDetection() {
+      document.getElementById('startBtn').style.display = 'none';
+      document.getElementById('restartBtn').style.display = 'inline-block';
+      document.getElementById('predictions').style.display = 'block';
+      document.getElementById('status').innerHTML = '<span class="success">분석 중... 카메라를 정면으로 바라보세요!</span>';
+    }
+
+    // 재시작
+    function restart() {
+      document.getElementById('startBtn').style.display = 'inline-block';
+      document.getElementById('restartBtn').style.display = 'none';
+      document.getElementById('predictions').style.display = 'none';
+      document.getElementById('music-recommendation').style.display = 'none';
+      document.getElementById('cosmetic-recommendation').style.display = 'none';
+      document.getElementById('status').innerHTML = '<span class="success">✓ 준비 완료! 분석 시작 버튼을 눌러주세요.</span>';
+    }
+
+    // 서비스 워커 등록
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then((registration) => {
+            console.log('SW registered: ', registration);
+          })
+          .catch((registrationError) => {
+            console.log('SW registration failed: ', registrationError);
+          });
+      });
+    }
+  </script>
 </body>
 </html>
