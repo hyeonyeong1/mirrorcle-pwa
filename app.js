@@ -752,29 +752,4 @@ window.addEventListener("beforeunload", () => {
   }
 });
 
-// CSS 애니메이션 추가
-const style = document.createElement('style');
-style.textContent = `
-  @keyframes slideInDown {
-    from {
-      opacity: 0;
-      transform: translateX(-50%) translateY(-100%);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
-    }
-  }
-  
-  @keyframes slideOutUp {
-    from {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
-    }
-    to {
-      opacity: 0;
-      transform: translateX(-50%) translateY(-100%);
-    }
-  }
-`;
 document.head.appendChild(style);
