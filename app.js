@@ -21,21 +21,20 @@ const YOUTUBE_API_KEY = 'YOUR_YOUTUBE_API_KEY';
 
 // 감정별 플레이리스트 검색 키워드
 const musicKeywords = {
-  '행복': ['행복할 때 듣는 노래 플레이리스트', '신나는 음악 모음', '기분 좋은 음악 플레이리스트', 'happy playlist', 'upbeat music playlist'],
-  '슬픔': ['슬플 때 듣는 노래 플레이리스트', '감성 발라드 모음', '우울할 때 듣는 음악', 'sad playlist', 'melancholy music playlist'],
-  '화남': ['화날 때 듣는 노래 플레이리스트', '록 음악 모음', '스트레스 해소 음악', 'angry playlist', 'rock music playlist'],
-  '놀람': ['놀랄 때 듣는 음악 플레이리스트', '흥미진진한 음악 모음', '긴장감 있는 음악', 'exciting playlist', 'energetic music playlist'],
-  '무표정': ['잔잔한 음악 플레이리스트', '평온한 음악 모음', '차분한 플레이리스트', 'calm playlist', 'relaxing music playlist'],
-  '변화없음': ['일상 음악 플레이리스트', '배경음악 모음', '공부할 때 듣는 음악', 'chill playlist', 'background music playlist'],
-  '두려움': ['불안할 때 듣는 음악 플레이리스트', '위로가 되는 음악 모음', '치유 음악', 'comfort playlist', 'healing music playlist'],
-  '혐오': ['기분 전환 음악 플레이리스트', '밝은 음악 모음', '긍정적인 음악', 'mood boost playlist', 'positive music playlist'],
-  'Happy': ['행복할 때 듣는 노래 플레이리스트', 'happy playlist', 'upbeat music playlist'],
-  'Sad': ['슬플 때 듣는 노래 플레이리스트', 'sad playlist', 'melancholy music playlist'],
-  'Angry': ['화날 때 듣는 노래 플레이리스트', 'angry playlist', 'rock music playlist'],
-  'Surprised': ['놀랄 때 듣는 음악 플레이리스트', 'exciting playlist', 'energetic music playlist'],
-  'Neutral': ['잔잔한 음악 플레이리스트', 'calm playlist', 'relaxing music playlist'],
-  'Fear': ['불안할 때 듣는 음악 플레이리스트', 'comfort playlist', 'healing music playlist'],
-  'Disgust': ['기분 전환 음악 플레이리스트', 'mood boost playlist', 'positive music playlist']
+  '행복': ['신나는 플레이리스트'],
+  '슬픔': ['감성 플레이리스트'], 
+  '무표정': ['멜론 100'],
+  'Happy': ['신나는 플레이리스트'],
+  'Sad': ['감성 플레이리스트'],
+  'Neutral': ['멜론 100'],
+  '화남': ['신나는 플레이리스트'], // 기본값으로 신나는 플레이리스트
+  '놀람': ['신나는 플레이리스트'],
+  '두려움': ['감성 플레이리스트'], // 기본값으로 감성 플레이리스트
+  '혐오': ['감성 플레이리스트'],
+  'Angry': ['신나는 플레이리스트'],
+  'Surprised': ['신나는 플레이리스트'],
+  'Fear': ['감성 플레이리스트'],
+  'Disgust': ['감성 플레이리스트']
 };
 
 // 감정별 이모지 매핑
@@ -575,125 +574,125 @@ function getDummyMusicData(emotion) {
   
   const playlistData = {
     '행복': [
-      { title: 'BTS - Dynamite | 신나는 K-POP 댄스 음악', artist: 'BTS Official' },
-      { title: 'Bruno Mars - Uptown Funk | 펑키한 댄스 히트곡', artist: 'Bruno Mars' },
-      { title: 'Pharrell Williams - Happy | 행복 테마송', artist: 'Pharrell Williams' },
-      { title: 'Dua Lipa - Levitating | 댄스 팝 명곡', artist: 'Dua Lipa' },
-      { title: 'The Weeknd - Blinding Lights | 신스팝 히트곡', artist: 'The Weeknd' },
-      { title: 'Lizzo - Good As Hell | 자신감 넘치는 팝송', artist: 'Lizzo' }
+      { title: '[신나는 음악] 드라이브할 때 듣기 좋은 플레이리스트', artist: 'Music Playlist' },
+      { title: '신나는 팝송 모음 | 기분 좋아지는 노래 플레이리스트', artist: 'Pop Music' },
+      { title: '댄스 뮤직 베스트 | 파티 플레이리스트 신나는 음악', artist: 'Dance Hits' },
+      { title: '신나는 K-POP 댄스곡 모음 | 운동할 때 듣는 노래', artist: 'K-Pop Dance' },
+      { title: '신나는 EDM 플레이리스트 | 클럽 뮤직 베스트', artist: 'EDM Hits' },
+      { title: '기분 좋아지는 신나는 음악 모음집', artist: 'Feel Good Music' }
     ],
     '슬픔': [
-      { title: 'Adele - Someone Like You | 감성 발라드 명곡', artist: 'Adele' },
-      { title: 'IU(아이유) - Through the Night | 잔잔한 K-발라드', artist: 'IU Official' },
-      { title: 'Sam Smith - Stay With Me | 애절한 R&B 발라드', artist: 'Sam Smith' },
-      { title: 'Billie Eilish - When The Party\'s Over | 우울한 팝발라드', artist: 'Billie Eilish' },
-      { title: '볼빨간사춘기 - 썸 탈꺼야 | 감성적인 인디 발라드', artist: 'BOL4' },
-      { title: 'Lana Del Rey - Young and Beautiful | 몽환적 발라드', artist: 'Lana Del Rey' }
+      { title: '감성 발라드 모음 | 밤에 듣기 좋은 슬픈 노래', artist: 'Ballad Collection' },
+      { title: '감성 플레이리스트 | 우울할 때 듣는 음악 모음', artist: 'Emotional Music' },
+      { title: '이별 노래 모음 | 슬픈 감성 발라드 플레이리스트', artist: 'Breakup Songs' },
+      { title: '감성 인디 음악 | 혼자 있을 때 듣는 노래', artist: 'Indie Emotional' },
+      { title: '비 오는 날 듣기 좋은 감성 플레이리스트', artist: 'Rainy Day Music' },
+      { title: '감성 R&B 모음 | 깊은 밤 플레이리스트', artist: 'R&B Emotional' }
     ],
     '화남': [
-      { title: 'Eminem - Lose Yourself | 강렬한 랩 음악', artist: 'Eminem' },
-      { title: 'Linkin Park - In The End | 뉴메탈 대표곡', artist: 'Linkin Park' },
-      { title: 'Rage Against The Machine - Killing In The Name | 하드록', artist: 'Rage Against The Machine' },
-      { title: 'Metallica - Enter Sandman | 헤비메탈 클래식', artist: 'Metallica' },
-      { title: 'Green Day - American Idiot | 펑크록 앤썸', artist: 'Green Day' },
-      { title: 'System Of A Down - Chop Suey! | 얼터너티브 메탈', artist: 'System Of A Down' }
+      { title: '[신나는 음악] 드라이브할 때 듣기 좋은 플레이리스트', artist: 'Music Playlist' },
+      { title: '신나는 팝송 모음 | 기분 좋아지는 노래 플레이리스트', artist: 'Pop Music' },
+      { title: '댄스 뮤직 베스트 | 파티 플레이리스트 신나는 음악', artist: 'Dance Hits' },
+      { title: '신나는 K-POP 댄스곡 모음 | 운동할 때 듣는 노래', artist: 'K-Pop Dance' },
+      { title: '신나는 EDM 플레이리스트 | 클럽 뮤직 베스트', artist: 'EDM Hits' },
+      { title: '기분 좋아지는 신나는 음악 모음집', artist: 'Feel Good Music' }
     ],
     '놀람': [
-      { title: 'Skrillex - Bangarang | 강렬한 더브스텝', artist: 'Skrillex' },
-      { title: 'David Guetta ft. Sia - Titanium | 에너지 넘치는 EDM', artist: 'David Guetta' },
-      { title: 'Calvin Harris - Feel So Close | 하우스 댄스 히트', artist: 'Calvin Harris' },
-      { title: 'Avicii - Wake Me Up | 프로그레시브 하우스', artist: 'Avicii' },
-      { title: 'Marshmello - Happier | 감성 EDM', artist: 'Marshmello' },
-      { title: 'The Chainsmokers - Closer | 일렉트로팝', artist: 'The Chainsmokers' }
+      { title: '[신나는 음악] 드라이브할 때 듣기 좋은 플레이리스트', artist: 'Music Playlist' },
+      { title: '신나는 팝송 모음 | 기분 좋아지는 노래 플레이리스트', artist: 'Pop Music' },
+      { title: '댄스 뮤직 베스트 | 파티 플레이리스트 신나는 음악', artist: 'Dance Hits' },
+      { title: '신나는 K-POP 댄스곡 모음 | 운동할 때 듣는 노래', artist: 'K-Pop Dance' },
+      { title: '신나는 EDM 플레이리스트 | 클럽 뮤직 베스트', artist: 'EDM Hits' },
+      { title: '기분 좋아지는 신나는 음악 모음집', artist: 'Feel Good Music' }
     ],
     '무표정': [
-      { title: 'Norah Jones - Don\'t Know Why | 잔잔한 재즈', artist: 'Norah Jones' },
-      { title: 'Lo-Fi Hip Hop Radio - 24/7 Study Music | 로파이 비트', artist: 'ChilledCow' },
-      { title: 'Ludovico Einaudi - Nuvole Bianche | 클래식 피아노', artist: 'Ludovico Einaudi' },
-      { title: 'Bon Iver - Skinny Love | 인디 포크', artist: 'Bon Iver' },
-      { title: 'Ólafur Arnalds - Near Light | 앰비언트 클래식', artist: 'Ólafur Arnalds' },
-      { title: 'Kiasmos - Blurred EP | 미니멀 일렉트로니카', artist: 'Kiasmos' }
+      { title: '멜론 차트 TOP 100 | 최신 인기곡 모음', artist: 'Melon Chart' },
+      { title: '2024 멜론 연간차트 베스트 100', artist: 'Melon Annual Chart' },
+      { title: '멜론 실시간 차트 1위~100위 논스톱', artist: 'Melon Real-time' },
+      { title: '멜론 HOT 100 | 지금 가장 인기있는 노래', artist: 'Melon Hot 100' },
+      { title: '멜론차트 인기곡 모음 | K-POP 히트송', artist: 'Melon K-Pop Hits' },
+      { title: '멜론 월간차트 TOP 100 베스트', artist: 'Melon Monthly Chart' }
     ],
     '변화없음': [
-      { title: 'Ed Sheeran - Perfect | 부드러운 팝 발라드', artist: 'Ed Sheeran' },
-      { title: 'John Mayer - Gravity | 어쿠스틱 블루스', artist: 'John Mayer' },
-      { title: 'Coldplay - Fix You | 대안 록 발라드', artist: 'Coldplay' },
-      { title: 'James Blake - Retrograde | 실험적 R&B', artist: 'James Blake' },
-      { title: 'Radiohead - Creep | 얼터너티브 록', artist: 'Radiohead' },
-      { title: 'The National - Bloodbuzz Ohio | 인디 록', artist: 'The National' }
+      { title: '멜론 차트 TOP 100 | 최신 인기곡 모음', artist: 'Melon Chart' },
+      { title: '2024 멜론 연간차트 베스트 100', artist: 'Melon Annual Chart' },
+      { title: '멜론 실시간 차트 1위~100위 논스톱', artist: 'Melon Real-time' },
+      { title: '멜론 HOT 100 | 지금 가장 인기있는 노래', artist: 'Melon Hot 100' },
+      { title: '멜론차트 인기곡 모음 | K-POP 히트송', artist: 'Melon K-Pop Hits' },
+      { title: '멜론 월간차트 TOP 100 베스트', artist: 'Melon Monthly Chart' }
     ],
     '두려움': [
-      { title: 'Enya - Only Time | 뉴에이지 힐링', artist: 'Enya' },
-      { title: 'Max Richter - On The Nature of Daylight | 네오클래식', artist: 'Max Richter' },
-      { title: 'Sigur Rós - Hoppípolla | 포스트록 서정곡', artist: 'Sigur Rós' },
-      { title: 'Brian Eno - Music for Airports | 앰비언트 음악', artist: 'Brian Eno' },
-      { title: 'Ólafur Arnalds & Nils Frahm - Four | 피아노 앰비언트', artist: 'Ólafur Arnalds' },
-      { title: 'GoGo Penguin - Hopopono | 재즈 트리오', artist: 'GoGo Penguin' }
+      { title: '멜론 차트 TOP 100 | 최신 인기곡 모음', artist: 'Melon Chart' },
+      { title: '2024 멜론 연간차트 베스트 100', artist: 'Melon Annual Chart' },
+      { title: '멜론 실시간 차트 1위~100위 논스톱', artist: 'Melon Real-time' },
+      { title: '멜론 HOT 100 | 지금 가장 인기있는 노래', artist: 'Melon Hot 100' },
+      { title: '멜론차트 인기곡 모음 | K-POP 히트송', artist: 'Melon K-Pop Hits' },
+      { title: '멜론 월간차트 TOP 100 베스트', artist: 'Melon Monthly Chart' }
     ],
     '혐오': [
-      { title: 'Katrina & The Waves - Walking on Sunshine | 밝은 팝', artist: 'Katrina & The Waves' },
-      { title: 'Bobby McFerrin - Don\'t Worry Be Happy | 긍정 메시지송', artist: 'Bobby McFerrin' },
-      { title: 'Jason Mraz - I\'m Yours | 어쿠스틱 팝', artist: 'Jason Mraz' },
-      { title: 'Jack Johnson - Better Together | 서핑 뮤직', artist: 'Jack Johnson' },
-      { title: 'Israel Kamakawiwoʻole - Over the Rainbow | 우쿨렐레 커버', artist: 'Israel Kamakawiwoʻole' },
-      { title: 'Vance Joy - Riptide | 인디 팝', artist: 'Vance Joy' }
+      { title: '멜론 차트 TOP 100 | 최신 인기곡 모음', artist: 'Melon Chart' },
+      { title: '2024 멜론 연간차트 베스트 100', artist: 'Melon Annual Chart' },
+      { title: '멜론 실시간 차트 1위~100위 논스톱', artist: 'Melon Real-time' },
+      { title: '멜론 HOT 100 | 지금 가장 인기있는 노래', artist: 'Melon Hot 100' },
+      { title: '멜론차트 인기곡 모음 | K-POP 히트송', artist: 'Melon K-Pop Hits' },
+      { title: '멜론 월간차트 TOP 100 베스트', artist: 'Melon Monthly Chart' }
     ],
     // 영어 감정명도 동일하게 매핑
     'Happy': [
-      { title: 'BTS - Dynamite | 신나는 K-POP 댄스 음악', artist: 'BTS Official' },
-      { title: 'Bruno Mars - Uptown Funk | 펑키한 댄스 히트곡', artist: 'Bruno Mars' },
-      { title: 'Pharrell Williams - Happy | 행복 테마송', artist: 'Pharrell Williams' },
-      { title: 'Dua Lipa - Levitating | 댄스 팝 명곡', artist: 'Dua Lipa' },
-      { title: 'The Weeknd - Blinding Lights | 신스팝 히트곡', artist: 'The Weeknd' },
-      { title: 'Lizzo - Good As Hell | 자신감 넘치는 팝송', artist: 'Lizzo' }
+      { title: '[신나는 음악] 드라이브할 때 듣기 좋은 플레이리스트', artist: 'Music Playlist' },
+      { title: '신나는 팝송 모음 | 기분 좋아지는 노래 플레이리스트', artist: 'Pop Music' },
+      { title: '댄스 뮤직 베스트 | 파티 플레이리스트 신나는 음악', artist: 'Dance Hits' },
+      { title: '신나는 K-POP 댄스곡 모음 | 운동할 때 듣는 노래', artist: 'K-Pop Dance' },
+      { title: '신나는 EDM 플레이리스트 | 클럽 뮤직 베스트', artist: 'EDM Hits' },
+      { title: '기분 좋아지는 신나는 음악 모음집', artist: 'Feel Good Music' }
     ],
     'Sad': [
-      { title: 'Adele - Someone Like You | 감성 발라드 명곡', artist: 'Adele' },
-      { title: 'IU(아이유) - Through the Night | 잔잔한 K-발라드', artist: 'IU Official' },
-      { title: 'Sam Smith - Stay With Me | 애절한 R&B 발라드', artist: 'Sam Smith' },
-      { title: 'Billie Eilish - When The Party\'s Over | 우울한 팝발라드', artist: 'Billie Eilish' },
-      { title: '볼빨간사춘기 - 썸 탈꺼야 | 감성적인 인디 발라드', artist: 'BOL4' },
-      { title: 'Lana Del Rey - Young and Beautiful | 몽환적 발라드', artist: 'Lana Del Rey' }
+      { title: '감성 발라드 모음 | 밤에 듣기 좋은 슬픈 노래', artist: 'Ballad Collection' },
+      { title: '감성 플레이리스트 | 우울할 때 듣는 음악 모음', artist: 'Emotional Music' },
+      { title: '이별 노래 모음 | 슬픈 감성 발라드 플레이리스트', artist: 'Breakup Songs' },
+      { title: '감성 인디 음악 | 혼자 있을 때 듣는 노래', artist: 'Indie Emotional' },
+      { title: '비 오는 날 듣기 좋은 감성 플레이리스트', artist: 'Rainy Day Music' },
+      { title: '감성 R&B 모음 | 깊은 밤 플레이리스트', artist: 'R&B Emotional' }
     ],
     'Angry': [
-      { title: 'Eminem - Lose Yourself | 강렬한 랩 음악', artist: 'Eminem' },
-      { title: 'Linkin Park - In The End | 뉴메탈 대표곡', artist: 'Linkin Park' },
-      { title: 'Rage Against The Machine - Killing In The Name | 하드록', artist: 'Rage Against The Machine' },
-      { title: 'Metallica - Enter Sandman | 헤비메탈 클래식', artist: 'Metallica' },
-      { title: 'Green Day - American Idiot | 펑크록 앤썸', artist: 'Green Day' },
-      { title: 'System Of A Down - Chop Suey! | 얼터너티브 메탈', artist: 'System Of A Down' }
+      { title: '[신나는 음악] 드라이브할 때 듣기 좋은 플레이리스트', artist: 'Music Playlist' },
+      { title: '신나는 팝송 모음 | 기분 좋아지는 노래 플레이리스트', artist: 'Pop Music' },
+      { title: '댄스 뮤직 베스트 | 파티 플레이리스트 신나는 음악', artist: 'Dance Hits' },
+      { title: '신나는 K-POP 댄스곡 모음 | 운동할 때 듣는 노래', artist: 'K-Pop Dance' },
+      { title: '신나는 EDM 플레이리스트 | 클럽 뮤직 베스트', artist: 'EDM Hits' },
+      { title: '기분 좋아지는 신나는 음악 모음집', artist: 'Feel Good Music' }
     ],
     'Surprised': [
-      { title: 'Skrillex - Bangarang | 강렬한 더브스텝', artist: 'Skrillex' },
-      { title: 'David Guetta ft. Sia - Titanium | 에너지 넘치는 EDM', artist: 'David Guetta' },
-      { title: 'Calvin Harris - Feel So Close | 하우스 댄스 히트', artist: 'Calvin Harris' },
-      { title: 'Avicii - Wake Me Up | 프로그레시브 하우스', artist: 'Avicii' },
-      { title: 'Marshmello - Happier | 감성 EDM', artist: 'Marshmello' },
-      { title: 'The Chainsmokers - Closer | 일렉트로팝', artist: 'The Chainsmokers' }
+      { title: '[신나는 음악] 드라이브할 때 듣기 좋은 플레이리스트', artist: 'Music Playlist' },
+      { title: '신나는 팝송 모음 | 기분 좋아지는 노래 플레이리스트', artist: 'Pop Music' },
+      { title: '댄스 뮤직 베스트 | 파티 플레이리스트 신나는 음악', artist: 'Dance Hits' },
+      { title: '신나는 K-POP 댄스곡 모음 | 운동할 때 듣는 노래', artist: 'K-Pop Dance' },
+      { title: '신나는 EDM 플레이리스트 | 클럽 뮤직 베스트', artist: 'EDM Hits' },
+      { title: '기분 좋아지는 신나는 음악 모음집', artist: 'Feel Good Music' }
     ],
     'Neutral': [
-      { title: 'Norah Jones - Don\'t Know Why | 잔잔한 재즈', artist: 'Norah Jones' },
-      { title: 'Lo-Fi Hip Hop Radio - 24/7 Study Music | 로파이 비트', artist: 'ChilledCow' },
-      { title: 'Ludovico Einaudi - Nuvole Bianche | 클래식 피아노', artist: 'Ludovico Einaudi' },
-      { title: 'Bon Iver - Skinny Love | 인디 포크', artist: 'Bon Iver' },
-      { title: 'Ólafur Arnalds - Near Light | 앰비언트 클래식', artist: 'Ólafur Arnalds' },
-      { title: 'Kiasmos - Blurred EP | 미니멀 일렉트로니카', artist: 'Kiasmos' }
+      { title: '멜론 차트 TOP 100 | 최신 인기곡 모음', artist: 'Melon Chart' },
+      { title: '2024 멜론 연간차트 베스트 100', artist: 'Melon Annual Chart' },
+      { title: '멜론 실시간 차트 1위~100위 논스톱', artist: 'Melon Real-time' },
+      { title: '멜론 HOT 100 | 지금 가장 인기있는 노래', artist: 'Melon Hot 100' },
+      { title: '멜론차트 인기곡 모음 | K-POP 히트송', artist: 'Melon K-Pop Hits' },
+      { title: '멜론 월간차트 TOP 100 베스트', artist: 'Melon Monthly Chart' }
     ],
     'Fear': [
-      { title: 'Enya - Only Time | 뉴에이지 힐링', artist: 'Enya' },
-      { title: 'Max Richter - On The Nature of Daylight | 네오클래식', artist: 'Max Richter' },
-      { title: 'Sigur Rós - Hoppípolla | 포스트록 서정곡', artist: 'Sigur Rós' },
-      { title: 'Brian Eno - Music for Airports | 앰비언트 음악', artist: 'Brian Eno' },
-      { title: 'Ólafur Arnalds & Nils Frahm - Four | 피아노 앰비언트', artist: 'Ólafur Arnalds' },
-      { title: 'GoGo Penguin - Hopopono | 재즈 트리오', artist: 'GoGo Penguin' }
+      { title: '멜론 차트 TOP 100 | 최신 인기곡 모음', artist: 'Melon Chart' },
+      { title: '2024 멜론 연간차트 베스트 100', artist: 'Melon Annual Chart' },
+      { title: '멜론 실시간 차트 1위~100위 논스톱', artist: 'Melon Real-time' },
+      { title: '멜론 HOT 100 | 지금 가장 인기있는 노래', artist: 'Melon Hot 100' },
+      { title: '멜론차트 인기곡 모음 | K-POP 히트송', artist: 'Melon K-Pop Hits' },
+      { title: '멜론 월간차트 TOP 100 베스트', artist: 'Melon Monthly Chart' }
     ],
     'Disgust': [
-      { title: 'Katrina & The Waves - Walking on Sunshine | 밝은 팝', artist: 'Katrina & The Waves' },
-      { title: 'Bobby McFerrin - Don\'t Worry Be Happy | 긍정 메시지송', artist: 'Bobby McFerrin' },
-      { title: 'Jason Mraz - I\'m Yours | 어쿠스틱 팝', artist: 'Jason Mraz' },
-      { title: 'Jack Johnson - Better Together | 서핑 뮤직', artist: 'Jack Johnson' },
-      { title: 'Israel Kamakawiwoʻole - Over the Rainbow | 우쿨렐레 커버', artist: 'Israel Kamakawiwoʻole' },
-      { title: 'Vance Joy - Riptide | 인디 팝', artist: 'Vance Joy' }
+      { title: '멜론 차트 TOP 100 | 최신 인기곡 모음', artist: 'Melon Chart' },
+      { title: '2024 멜론 연간차트 베스트 100', artist: 'Melon Annual Chart' },
+      { title: '멜론 실시간 차트 1위~100위 논스톱', artist: 'Melon Real-time' },
+      { title: '멜론 HOT 100 | 지금 가장 인기있는 노래', artist: 'Melon Hot 100' },
+      { title: '멜론차트 인기곡 모음 | K-POP 히트송', artist: 'Melon K-Pop Hits' },
+      { title: '멜론 월간차트 TOP 100 베스트', artist: 'Melon Monthly Chart' }
     ]
   };
   
