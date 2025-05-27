@@ -17,12 +17,12 @@ let countdownInterval;
 let timeLeft = 5;
 
 // YouTube API 키 (실제 사용시에는 본인의 API 키로 교체 필요)
-const YOUTUBE_API_KEY = 'YOUR_YOUTUBE_API_KEY';
+const YOUTUBE_API_KEY = '실제_유튜브_API_키';
 
 // 감정별 플레이리스트 검색 키워드
 const musicKeywords = {
-  '행복': ['신나는 플레이리스트'], // 기본값으로 신나는 플레이리스트
-  '슬픔': ['감성 플레이리스트'], // 기본값으로 감성 플레이리스트
+  '행복한 표정': ['신나는 플레이리스트'], // 기본값으로 신나는 플레이리스트
+  '슬픈표정': ['감성 플레이리스트'], // 기본값으로 감성 플레이리스트
   '무표정': ['멜론 100']
 };
 
@@ -554,7 +554,7 @@ function showDummyMusic(emotion) {
   musicContent.innerHTML = html;
 }
 
-// 감정에 따른 차별화된 더미 플레이리스트 데이터
+// 감정에 따른 차별화된 더미 플레이리스트 
 function getDummyMusicData(emotion) {
   console.log('getDummyMusicData 호출됨 - 감정:', emotion);
   
