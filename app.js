@@ -585,7 +585,7 @@ function getDummyMusicData(emotion) {
     ]
   };
   
-  const result = playlistData[emotion] || playlistData['무표정'];
+  const result = playlistData[emotion] || playlistData['행복한 표정'];
 console.log('받은 감정 값:', emotion); // 이 줄 추가
 console.log('해당 감정의 플레이리스트 존재 여부:', playlistData[emotion] ? '있음' : '없음'); // 이 줄 추가
 console.log('반환되는 플레이리스트:', result);
