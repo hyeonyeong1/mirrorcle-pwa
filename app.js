@@ -21,30 +21,19 @@ const YOUTUBE_API_KEY = 'YOUR_YOUTUBE_API_KEY';
 
 // 감정별 플레이리스트 검색 키워드
 const musicKeywords = {
-  '행복': ['신나는 플레이리스트'],
-  '슬픔': ['감성 플레이리스트'], 
+  '행복': ['신나는 플레이리스트'], // 기본값으로 신나는 플레이리스트
+  '슬픔': ['감성 플레이리스트'], // 기본값으로 감성 플레이리스트
   '무표정': ['멜론 100'],
   'Happy': ['신나는 플레이리스트'],
   'Sad': ['감성 플레이리스트'],
-  'Neutral': ['멜론 100'],
-  '화남': ['신나는 플레이리스트'], // 기본값으로 신나는 플레이리스트
-  '놀람': ['신나는 플레이리스트'],
-  '두려움': ['감성 플레이리스트'], // 기본값으로 감성 플레이리스트
-  '혐오': ['감성 플레이리스트'],
-  'Angry': ['신나는 플레이리스트'],
-  'Surprised': ['신나는 플레이리스트'],
-  'Fear': ['감성 플레이리스트'],
-  'Disgust': ['감성 플레이리스트']
+  'Neutral': ['멜론 100']
 };
 
 // 감정별 이모지 매핑
 const emotionEmojis = {
-  'Happy': '😊', 'Sad': '😢', 'Angry': '😠', 'Surprised': '😲',
-  'Neutral': '😐', 'Fear': '😨', 'Disgust': '🤢',
-  '행복': '😊', '슬픔': '😢', '화남': '😠', '놀람': '😲',
-  '무표정': '😐', '변화없음': '😐', '두려움': '😨', '혐오': '🤢',
-  'Class 1': '😊', 'Class 2': '😢', 'Class 3': '😠', 
-  'Class 4': '😲', 'Class 5': '😐', 'Class 6': '😨'
+  '행복한 표정': '😊', 
+  '슬픈표정': '😢', 
+  '무표정': '😐'
 };
 
 // 피부 상태별 이모지 매핑
@@ -573,7 +562,7 @@ function getDummyMusicData(emotion) {
   console.log('getDummyMusicData 호출됨 - 감정:', emotion);
   
   const playlistData = {
-    '행복': [
+    '행복한 표정': [
       { title: '[신나는 음악] 드라이브할 때 듣기 좋은 플레이리스트', artist: 'Music Playlist' },
       { title: '신나는 팝송 모음 | 기분 좋아지는 노래 플레이리스트', artist: 'Pop Music' },
       { title: '댄스 뮤직 베스트 | 파티 플레이리스트 신나는 음악', artist: 'Dance Hits' },
@@ -581,29 +570,13 @@ function getDummyMusicData(emotion) {
       { title: '신나는 EDM 플레이리스트 | 클럽 뮤직 베스트', artist: 'EDM Hits' },
       { title: '기분 좋아지는 신나는 음악 모음집', artist: 'Feel Good Music' }
     ],
-    '슬픔': [
+    '슬픈표정': [
       { title: '감성 발라드 모음 | 밤에 듣기 좋은 슬픈 노래', artist: 'Ballad Collection' },
       { title: '감성 플레이리스트 | 우울할 때 듣는 음악 모음', artist: 'Emotional Music' },
       { title: '이별 노래 모음 | 슬픈 감성 발라드 플레이리스트', artist: 'Breakup Songs' },
       { title: '감성 인디 음악 | 혼자 있을 때 듣는 노래', artist: 'Indie Emotional' },
       { title: '비 오는 날 듣기 좋은 감성 플레이리스트', artist: 'Rainy Day Music' },
       { title: '감성 R&B 모음 | 깊은 밤 플레이리스트', artist: 'R&B Emotional' }
-    ],
-    '화남': [
-      { title: '[신나는 음악] 드라이브할 때 듣기 좋은 플레이리스트', artist: 'Music Playlist' },
-      { title: '신나는 팝송 모음 | 기분 좋아지는 노래 플레이리스트', artist: 'Pop Music' },
-      { title: '댄스 뮤직 베스트 | 파티 플레이리스트 신나는 음악', artist: 'Dance Hits' },
-      { title: '신나는 K-POP 댄스곡 모음 | 운동할 때 듣는 노래', artist: 'K-Pop Dance' },
-      { title: '신나는 EDM 플레이리스트 | 클럽 뮤직 베스트', artist: 'EDM Hits' },
-      { title: '기분 좋아지는 신나는 음악 모음집', artist: 'Feel Good Music' }
-    ],
-    '놀람': [
-      { title: '[신나는 음악] 드라이브할 때 듣기 좋은 플레이리스트', artist: 'Music Playlist' },
-      { title: '신나는 팝송 모음 | 기분 좋아지는 노래 플레이리스트', artist: 'Pop Music' },
-      { title: '댄스 뮤직 베스트 | 파티 플레이리스트 신나는 음악', artist: 'Dance Hits' },
-      { title: '신나는 K-POP 댄스곡 모음 | 운동할 때 듣는 노래', artist: 'K-Pop Dance' },
-      { title: '신나는 EDM 플레이리스트 | 클럽 뮤직 베스트', artist: 'EDM Hits' },
-      { title: '기분 좋아지는 신나는 음악 모음집', artist: 'Feel Good Music' }
     ],
     '무표정': [
       { title: '멜론 차트 TOP 100 | 최신 인기곡 모음', artist: 'Melon Chart' },
@@ -612,31 +585,8 @@ function getDummyMusicData(emotion) {
       { title: '멜론 HOT 100 | 지금 가장 인기있는 노래', artist: 'Melon Hot 100' },
       { title: '멜론차트 인기곡 모음 | K-POP 히트송', artist: 'Melon K-Pop Hits' },
       { title: '멜론 월간차트 TOP 100 베스트', artist: 'Melon Monthly Chart' }
-    ],
-    '변화없음': [
-      { title: '멜론 차트 TOP 100 | 최신 인기곡 모음', artist: 'Melon Chart' },
-      { title: '2024 멜론 연간차트 베스트 100', artist: 'Melon Annual Chart' },
-      { title: '멜론 실시간 차트 1위~100위 논스톱', artist: 'Melon Real-time' },
-      { title: '멜론 HOT 100 | 지금 가장 인기있는 노래', artist: 'Melon Hot 100' },
-      { title: '멜론차트 인기곡 모음 | K-POP 히트송', artist: 'Melon K-Pop Hits' },
-      { title: '멜론 월간차트 TOP 100 베스트', artist: 'Melon Monthly Chart' }
-    ],
-    '두려움': [
-      { title: '멜론 차트 TOP 100 | 최신 인기곡 모음', artist: 'Melon Chart' },
-      { title: '2024 멜론 연간차트 베스트 100', artist: 'Melon Annual Chart' },
-      { title: '멜론 실시간 차트 1위~100위 논스톱', artist: 'Melon Real-time' },
-      { title: '멜론 HOT 100 | 지금 가장 인기있는 노래', artist: 'Melon Hot 100' },
-      { title: '멜론차트 인기곡 모음 | K-POP 히트송', artist: 'Melon K-Pop Hits' },
-      { title: '멜론 월간차트 TOP 100 베스트', artist: 'Melon Monthly Chart' }
-    ],
-    '혐오': [
-      { title: '멜론 차트 TOP 100 | 최신 인기곡 모음', artist: 'Melon Chart' },
-      { title: '2024 멜론 연간차트 베스트 100', artist: 'Melon Annual Chart' },
-      { title: '멜론 실시간 차트 1위~100위 논스톱', artist: 'Melon Real-time' },
-      { title: '멜론 HOT 100 | 지금 가장 인기있는 노래', artist: 'Melon Hot 100' },
-      { title: '멜론차트 인기곡 모음 | K-POP 히트송', artist: 'Melon K-Pop Hits' },
-      { title: '멜론 월간차트 TOP 100 베스트', artist: 'Melon Monthly Chart' }
-    ],
+    ]
+  }
     // 영어 감정명도 동일하게 매핑
     'Happy': [
       { title: '[신나는 음악] 드라이브할 때 듣기 좋은 플레이리스트', artist: 'Music Playlist' },
@@ -654,39 +604,7 @@ function getDummyMusicData(emotion) {
       { title: '비 오는 날 듣기 좋은 감성 플레이리스트', artist: 'Rainy Day Music' },
       { title: '감성 R&B 모음 | 깊은 밤 플레이리스트', artist: 'R&B Emotional' }
     ],
-    'Angry': [
-      { title: '[신나는 음악] 드라이브할 때 듣기 좋은 플레이리스트', artist: 'Music Playlist' },
-      { title: '신나는 팝송 모음 | 기분 좋아지는 노래 플레이리스트', artist: 'Pop Music' },
-      { title: '댄스 뮤직 베스트 | 파티 플레이리스트 신나는 음악', artist: 'Dance Hits' },
-      { title: '신나는 K-POP 댄스곡 모음 | 운동할 때 듣는 노래', artist: 'K-Pop Dance' },
-      { title: '신나는 EDM 플레이리스트 | 클럽 뮤직 베스트', artist: 'EDM Hits' },
-      { title: '기분 좋아지는 신나는 음악 모음집', artist: 'Feel Good Music' }
-    ],
-    'Surprised': [
-      { title: '[신나는 음악] 드라이브할 때 듣기 좋은 플레이리스트', artist: 'Music Playlist' },
-      { title: '신나는 팝송 모음 | 기분 좋아지는 노래 플레이리스트', artist: 'Pop Music' },
-      { title: '댄스 뮤직 베스트 | 파티 플레이리스트 신나는 음악', artist: 'Dance Hits' },
-      { title: '신나는 K-POP 댄스곡 모음 | 운동할 때 듣는 노래', artist: 'K-Pop Dance' },
-      { title: '신나는 EDM 플레이리스트 | 클럽 뮤직 베스트', artist: 'EDM Hits' },
-      { title: '기분 좋아지는 신나는 음악 모음집', artist: 'Feel Good Music' }
-    ],
     'Neutral': [
-      { title: '멜론 차트 TOP 100 | 최신 인기곡 모음', artist: 'Melon Chart' },
-      { title: '2024 멜론 연간차트 베스트 100', artist: 'Melon Annual Chart' },
-      { title: '멜론 실시간 차트 1위~100위 논스톱', artist: 'Melon Real-time' },
-      { title: '멜론 HOT 100 | 지금 가장 인기있는 노래', artist: 'Melon Hot 100' },
-      { title: '멜론차트 인기곡 모음 | K-POP 히트송', artist: 'Melon K-Pop Hits' },
-      { title: '멜론 월간차트 TOP 100 베스트', artist: 'Melon Monthly Chart' }
-    ],
-    'Fear': [
-      { title: '멜론 차트 TOP 100 | 최신 인기곡 모음', artist: 'Melon Chart' },
-      { title: '2024 멜론 연간차트 베스트 100', artist: 'Melon Annual Chart' },
-      { title: '멜론 실시간 차트 1위~100위 논스톱', artist: 'Melon Real-time' },
-      { title: '멜론 HOT 100 | 지금 가장 인기있는 노래', artist: 'Melon Hot 100' },
-      { title: '멜론차트 인기곡 모음 | K-POP 히트송', artist: 'Melon K-Pop Hits' },
-      { title: '멜론 월간차트 TOP 100 베스트', artist: 'Melon Monthly Chart' }
-    ],
-    'Disgust': [
       { title: '멜론 차트 TOP 100 | 최신 인기곡 모음', artist: 'Melon Chart' },
       { title: '2024 멜론 연간차트 베스트 100', artist: 'Melon Annual Chart' },
       { title: '멜론 실시간 차트 1위~100위 논스톱', artist: 'Melon Real-time' },
@@ -706,10 +624,9 @@ return result;
 // 감정 텍스트 변환
 function getEmotionText(emotion) {
   const emotionTexts = {
-    '행복': '행복한', '슬픔': '슬픈', '화남': '화난', '놀람': '놀란',
-    '무표정': '차분한', '변화없음': '평온한', '두려움': '불안한', '혐오': '불쾌한',
-    'Happy': '행복한', 'Sad': '슬픈', 'Angry': '화난', 'Surprised': '놀란',
-    'Neutral': '차분한', 'Fear': '불안한', 'Disgust': '불쾌한'
+    '행복한 표정': '행복한', 
+    '슬픈표정': '슬픈', 
+    '무표정': '차분한'
   };
   
   return emotionTexts[emotion] || '현재';
