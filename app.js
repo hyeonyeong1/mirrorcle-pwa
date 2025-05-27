@@ -17,12 +17,12 @@ let countdownInterval;
 let timeLeft = 5;
 
 // YouTube API 키 (실제 사용시에는 본인의 API 키로 교체 필요)
-const YOUTUBE_API_KEY = '실제_유튜브_API_키';
+const YOUTUBE_API_KEY = 'YOUTUBE_API_KEY';
 
 // 감정별 플레이리스트 검색 키워드
 const musicKeywords = {
-  '행복한 표정': ['신나는 플레이리스트'], // 기본값으로 신나는 플레이리스트
-  '슬픈표정': ['감성 플레이리스트'], // 기본값으로 감성 플레이리스트
+  '행복한 표정': ['신나는 플레이리스트'], 
+  '슬픈표정': ['감성 플레이리스트'], 
   '무표정': ['멜론 100']
 };
 
