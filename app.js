@@ -17,7 +17,7 @@ let countdownInterval;
 let timeLeft = 5;
 
 // YouTube API 키 (실제 사용시에는 본인의 API 키로 교체 필요)
-const YOUTUBE_API_KEY = 'YOUTUBE_API_KEY';
+const YOUTUBE_API_KEY = '_YOUTUBE_API_KEY';
 
 // 감정별 플레이리스트 검색 키워드
 const musicKeywords = {
