@@ -327,6 +327,11 @@ async function predict() {
         
         if (currentMode === 'emotion') {
           recommendMusic(topPrediction.className);
+        } else if (currentMode === 'skin') {
+          // 피부 분석 완료 후 피부 타입 선택 모달 표시
+          setTimeout(() => {
+            showSkinTypeModal();
+          }, 1500); // 1.5초 후 모달 표시
         }
         
         showRestartButton();
@@ -1470,3 +1475,4 @@ skinCareStyles.textContent = `
 
 // 스타일을 head에 추가
 document.head.appendChild(skinCareStyles);
+ㄹ
