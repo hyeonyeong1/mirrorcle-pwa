@@ -554,11 +554,15 @@ function showDummyMusic(emotion) {
   musicContent.innerHTML = html;
 }
 
-// 감정에 따른 차별화된 더미 플레이리스트 
+// 감정에 따른 차별화된 더미 플레이리스트 - 수정된 버전
 function getDummyMusicData(emotion) {
   console.log('getDummyMusicData 호출됨 - 감정:', emotion);
   
+  // 감정 값 정규화 (공백, 대소문자 처리)
+  const normalizedEmotion = emotion.trim().toLowerCase();
+  
   const playlistData = {
+    // 다양한 형태의 행복한 감정 키들
     '행복한 표정': [
       { title: '[신나는 음악] 드라이브할 때 듣기 좋은 플레이리스트', artist: 'Music Playlist' },
       { title: '신나는 팝송 모음 | 기분 좋아지는 노래 플레이리스트', artist: 'Pop Music' },
@@ -567,6 +571,16 @@ function getDummyMusicData(emotion) {
       { title: '신나는 EDM 플레이리스트 | 클럽 뮤직 베스트', artist: 'EDM Hits' },
       { title: '기분 좋아지는 신나는 음악 모음집', artist: 'Feel Good Music' }
     ],
+    'happy': [
+      { title: '[신나는 음악] 드라이브할 때 듣기 좋은 플레이리스트', artist: 'Music Playlist' },
+      { title: '신나는 팝송 모음 | 기분 좋아지는 노래 플레이리스트', artist: 'Pop Music' },
+      { title: '댄스 뮤직 베스트 | 파티 플레이리스트 신나는 음악', artist: 'Dance Hits' },
+      { title: '신나는 K-POP 댄스곡 모음 | 운동할 때 듣는 노래', artist: 'K-Pop Dance' },
+      { title: '신나는 EDM 플레이리스트 | 클럽 뮤직 베스트', artist: 'EDM Hits' },
+      { title: '기분 좋아지는 신나는 음악 모음집', artist: 'Feel Good Music' }
+    ],
+    
+    // 다양한 형태의 슬픈 감정 키들
     '슬픈표정': [
       { title: '감성 발라드 모음 | 밤에 듣기 좋은 슬픈 노래', artist: 'Ballad Collection' },
       { title: '감성 플레이리스트 | 우울할 때 듣는 음악 모음', artist: 'Emotional Music' },
@@ -575,7 +589,25 @@ function getDummyMusicData(emotion) {
       { title: '비 오는 날 듣기 좋은 감성 플레이리스트', artist: 'Rainy Day Music' },
       { title: '감성 R&B 모음 | 깊은 밤 플레이리스트', artist: 'R&B Emotional' }
     ],
+    'sad': [
+      { title: '감성 발라드 모음 | 밤에 듣기 좋은 슬픈 노래', artist: 'Ballad Collection' },
+      { title: '감성 플레이리스트 | 우울할 때 듣는 음악 모음', artist: 'Emotional Music' },
+      { title: '이별 노래 모음 | 슬픈 감성 발라드 플레이리스트', artist: 'Breakup Songs' },
+      { title: '감성 인디 음악 | 혼자 있을 때 듣는 노래', artist: 'Indie Emotional' },
+      { title: '비 오는 날 듣기 좋은 감성 플레이리스트', artist: 'Rainy Day Music' },
+      { title: '감성 R&B 모음 | 깊은 밤 플레이리스트', artist: 'R&B Emotional' }
+    ],
+    
+    // 다양한 형태의 무표정/중립 감정 키들
     '무표정': [
+      { title: '멜론 차트 TOP 100 | 최신 인기곡 모음', artist: 'Melon Chart' },
+      { title: '2024 멜론 연간차트 베스트 100', artist: 'Melon Annual Chart' },
+      { title: '멜론 실시간 차트 1위~100위 논스톱', artist: 'Melon Real-time' },
+      { title: '멜론 HOT 100 | 지금 가장 인기있는 노래', artist: 'Melon Hot 100' },
+      { title: '멜론차트 인기곡 모음 | K-POP 히트송', artist: 'Melon K-Pop Hits' },
+      { title: '멜론 월간차트 TOP 100 베스트', artist: 'Melon Monthly Chart' }
+    ],
+    'neutral': [
       { title: '멜론 차트 TOP 100 | 최신 인기곡 모음', artist: 'Melon Chart' },
       { title: '2024 멜론 연간차트 베스트 100', artist: 'Melon Annual Chart' },
       { title: '멜론 실시간 차트 1위~100위 논스톱', artist: 'Melon Real-time' },
@@ -585,22 +617,44 @@ function getDummyMusicData(emotion) {
     ]
   };
   
-  const result = playlistData[emotion] || playlistData['무표정'];
-console.log('받은 감정 값:', emotion); // 이 줄 추가
-console.log('해당 감정의 플레이리스트 존재 여부:', playlistData[emotion] ? '있음' : '없음'); // 이 줄 추가
-console.log('반환되는 플레이리스트:', result);
-return result;
+  // 먼저 정확한 매칭을 시도
+  let result = playlistData[emotion];
+  
+  // 정확한 매칭이 없으면 정규화된 키로 매칭 시도
+  if (!result) {
+    result = playlistData[normalizedEmotion];
+  }
+  
+  // 여전히 매칭되지 않으면 감정 키워드를 포함하는지 확인
+  if (!result) {
+    if (normalizedEmotion.includes('행복') || normalizedEmotion.includes('happy') || normalizedEmotion.includes('joy')) {
+      result = playlistData['행복한 표정'];
+    } else if (normalizedEmotion.includes('슬픈') || normalizedEmotion.includes('sad') || normalizedEmotion.includes('우울')) {
+      result = playlistData['슬픈표정'];
+    } else {
+      result = playlistData['무표정']; // 기본값
+    }
+  }
+  
+  console.log('받은 감정 값:', emotion);
+  console.log('정규화된 감정 값:', normalizedEmotion);
+  console.log('매칭된 플레이리스트 길이:', result?.length);
+  console.log('반환되는 플레이리스트 첫 번째 항목:', result?.[0]);
+  
+  return result;
 }
 
-// 감정 텍스트 변환
+// 감정 텍스트 변환 - 더 유연한 매칭
 function getEmotionText(emotion) {
-  const emotionTexts = {
-    '행복한 표정': '행복한', 
-    '슬픈표정': '슬픈', 
-    '무표정': '차분한'
-  };
+  const normalizedEmotion = emotion.trim().toLowerCase();
   
-  return emotionTexts[emotion] || '현재';
+  if (normalizedEmotion.includes('행복') || normalizedEmotion.includes('happy') || normalizedEmotion.includes('joy')) {
+    return '행복한';
+  } else if (normalizedEmotion.includes('슬픈') || normalizedEmotion.includes('sad') || normalizedEmotion.includes('우울')) {
+    return '슬픈';
+  } else {
+    return '차분한';
+  }
 }
 
 // YouTube 동영상 재생 (새 탭에서)
