@@ -911,6 +911,19 @@ function showSkinTypeModal() {
     musicDiv.style.display = 'none';
   }
   
+  // 기존 모달이 있으면 완전히 삭제
+  const oldModal = document.getElementById('skin-type-modal');
+  if (oldModal) {
+    oldModal.remove();
+  }
+  
+  // 새로운 모달 생성
+  const skinModal = document.createElement('div');
+  skinModal.id = 'skin-type-modal';
+  skinModal.className = 'skin-modal';
+  document.body.appendChild(skinModal)
+  }
+  
   // 피부 타입 모달 HTML이 없으면 생성
   let skinModal = document.getElementById('skin-type-modal');
   if (!skinModal) {
