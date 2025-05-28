@@ -967,7 +967,28 @@ function showSkinTypeModal() {
   
   // 모달 표시
   skinModal.style.display = 'flex';
+
+  // 이벤트 리스너를 한 번만 등록하도록 수정
+  skinModal.removeEventListener('click', handleModalClick);
+  skinModal.removeEventListener('touchstart', handleModalTouch);
   
+  skinModal.addEventListener('click', handleModalClick);
+  skinModal.addEventListener('touchstart', handleModalTouch);
+}
+
+// 별도 함수로 분리
+function handleModalClick(e) {
+  if (e.target === e.currentTarget) {
+    closeSkinTypeModal();
+  }
+}
+
+function handleModalTouch(e) {
+  if (e.target === e.currentTarget) {
+    closeSkinTypeModal();
+  }
+}
+
   // 모달 외부 클릭 시 닫기
   skinModal.addEventListener('click', function(e) {
   if (e.target === skinModal) {
