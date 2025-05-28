@@ -1251,7 +1251,6 @@ skinCareStyles.textContent = `
     background: none;
     border: none;
     font-size: 24px;
-    cursor: pointer;
     color: white;
     padding: 0;
     width: 30px;
@@ -1289,7 +1288,6 @@ skinCareStyles.textContent = `
     border: 2px solid #e1e5e9;
     border-radius: 12px;
     padding: 20px 15px;
-    cursor: pointer;
     transition: all 0.3s ease;
     display: flex;
     flex-direction: column;
@@ -1446,7 +1444,6 @@ skinCareStyles.textContent = `
     border: none;
     padding: 12px 20px;
     border-radius: 25px;
-    cursor: pointer;
     font-weight: 500;
     transition: transform 0.2s ease;
   }
