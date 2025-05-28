@@ -504,7 +504,10 @@ function displayMusic(videos, emotion) {
   videos.forEach(video => {
     html += `
       <div class="music-item" onclick="playYouTubeVideo('${video.id.videoId}')">
-        <img src="${video.snippet.thumbnails.medium.url}" alt="${video.snippet.title}" class="music-thumbnail">
+        <img src="${video.snippet.thumbnails.medium.url}" 
+             alt="${video.snippet.title}" 
+             class="music-thumbnail"
+             onerror="this.src='https://via.placeholder.com/240x135/333/fff?text=🎵'">
         <div class="music-info">
           <div class="music-title-text">${video.snippet.title}</div>
           <div class="music-channel">${video.snippet.channelTitle}</div>
@@ -520,7 +523,7 @@ function displayMusic(videos, emotion) {
   musicContent.innerHTML = html;
 }
 
-// 더미 음악 데이터 표시 (API 키가 없을 때)
+// 더미 음악 데이터 표시 (API 키가 없을 때) - 썸네일 문제 해결
 function showDummyMusic(emotion) {
   const musicContent = document.getElementById('music-content');
   const emotionText = getEmotionText(emotion);
@@ -535,10 +538,17 @@ function showDummyMusic(emotion) {
     <small style="color: #999;">(YouTube API 키가 설정되지 않아 샘플 데이터를 표시합니다)</small>
   </p><div class="music-grid">`;
   
-  dummyVideos.forEach(video => {
+  dummyVideos.forEach((video, index) => {
+    // 감정에 따른 썸네일 색상 선택
+    const thumbnailColor = getThumbnailColor(emotion);
+    const thumbnailUrl = `https://via.placeholder.com/240x135/${thumbnailColor}/fff?text=🎵`;
+    
     html += `
       <div class="music-item" onclick="searchYouTube('${video.title}')">
-        <img src="/api/placeholder/240/135" alt="${video.title}" class="music-thumbnail">
+        <img src="${thumbnailUrl}" 
+             alt="${video.title}" 
+             class="music-thumbnail"
+             loading="lazy">
         <div class="music-info">
           <div class="music-title-text">${video.title}</div>
           <div class="music-channel">${video.artist}</div>
@@ -552,6 +562,19 @@ function showDummyMusic(emotion) {
   
   html += '</div>';
   musicContent.innerHTML = html;
+}
+
+// 감정에 따른 썸네일 색상 반환
+function getThumbnailColor(emotion) {
+  const normalizedEmotion = emotion.trim().toLowerCase();
+  
+  if (normalizedEmotion.includes('행복') || normalizedEmotion.includes('happy') || normalizedEmotion.includes('joy')) {
+    return 'FFD700'; // 금색 (행복한 느낌)
+  } else if (normalizedEmotion.includes('슬픈') || normalizedEmotion.includes('sad') || normalizedEmotion.includes('우울')) {
+    return '4169E1'; // 로얄블루 (차분한 느낌)
+  } else {
+    return '32CD32'; // 라임그린 (중립적인 느낌)
+  }
 }
 
 // 감정에 따른 차별화된 더미 플레이리스트 - 수정된 버전
