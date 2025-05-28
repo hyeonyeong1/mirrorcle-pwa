@@ -1003,19 +1003,21 @@ function closeSkinTypeModal() {
 // 4. 피부 타입별 제품 추천 함수
 function recommendSkincare(skinType) {
   console.log('스킨케어 추천 시작:', skinType);
+
+  // 피부 추천 전용 div 사용
+let recommendationDiv = document.getElementById('skincare-recommendation');
+if (!recommendationDiv) {
+  // 요소가 없으면 생성
+  recommendationDiv = document.createElement('div');
+  recommendationDiv.id = 'skincare-recommendation';
+  recommendationDiv.className = 'recommendation-section';
   
-  // 기존 음악 추천 영역을 스킨케어 추천으로 변경
-  let recommendationDiv = document.getElementById('music-recommendation');
-  if (!recommendationDiv) {
-    // 요소가 없으면 생성
-    recommendationDiv = document.createElement('div');
-    recommendationDiv.id = 'music-recommendation';
-    recommendationDiv.className = 'recommendation-section';
-    
-    // 적절한 위치에 삽입 (status 다음)
-    const statusDiv = document.getElementById('status');
-    statusDiv.parentNode.insertBefore(recommendationDiv, statusDiv.nextSibling);
-  }
+  // 적절한 위치에 삽입 (status 다음)
+  const statusDiv = document.getElementById('status');
+  statusDiv.parentNode.insertBefore(recommendationDiv, statusDiv.nextSibling);
+}
+```
+
   
   // 스킨케어 제품 데이터 가져오기
   const skinData = skinCareProducts[skinType];
@@ -1105,10 +1107,10 @@ function recommendSkincare(skinType) {
 
 // 로딩 메시지 표시
 function showLoadingMessage(message) {
-  let recommendationDiv = document.getElementById('music-recommendation');
+  let recommendationDiv = document.getElementById('skincare-recommendation');
   if (!recommendationDiv) {
     recommendationDiv = document.createElement('div');
-    recommendationDiv.id = 'music-recommendation';
+    recommendationDiv.id = 'skincare-recommendation';
     const statusDiv = document.getElementById('status');
     statusDiv.parentNode.insertBefore(recommendationDiv, statusDiv.nextSibling);
   }
@@ -1137,9 +1139,18 @@ function getCategoryEmoji(category) {
 
 // 온라인 제품 검색 (구글 검색으로 연결)
 function searchProducts(skinType) {
-  const searchQuery = `${skinType} 피부 스킨케어 제품 추천`;
-  const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(searchQuery)}`;
-  window.open(searchUrl, '_blank');
+  // 쿠팡과 올리브영 동시에 열기
+  const coupangQuery = `${skinType} 피부 스킨케어`;
+  const oliveYoungQuery = `${skinType} 피부 스킨케어`;
+  
+  const coupangUrl = `https://www.coupang.com/np/search?q=${encodeURIComponent(coupangQuery)}`;
+  const oliveYoungUrl = `https://www.oliveyoung.co.kr/store/search/getSearchMain.do?query=${encodeURIComponent(oliveYoungQuery)}`;
+  
+  // 두 사이트를 새 탭으로 열기
+  window.open(coupangUrl, '_blank');
+  setTimeout(() => {
+    window.open(oliveYoungUrl, '_blank');
+  }, 500); // 0.5초 간격으로 열기
 }
 
 // 기존 predict 함수 수정 (피부 분석 완료 후 모달 표시)
@@ -1475,4 +1486,3 @@ skinCareStyles.textContent = `
 
 // 스타일을 head에 추가
 document.head.appendChild(skinCareStyles);
-ㄹ
