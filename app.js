@@ -1,4 +1,4 @@
-//PWA 관련 변수
+// PWA 관련 변수
 let deferredPrompt;
 let isInstalled = false;
 
@@ -521,6 +521,7 @@ function displayMusic(videos, emotion) {
   
   html += '</div>';
   musicContent.innerHTML = html;
+}
 
 // 더미 음악 데이터 표시 (API 키가 없을 때) - 썸네일 문제 해결
 function showDummyMusic(emotion) {
