@@ -1520,3 +1520,21 @@ window.closeSkinTypeModal = closeSkinTypeModal;
 window.selectSkinType = selectSkinType;
 window.showSkinTypeModal = showSkinTypeModal;
 window.searchProducts = searchProducts;
+
+const fixStyle = document.createElement('style');
+fixStyle.textContent = `
+  * {
+    touch-action: manipulation;
+  }
+  
+  button, .music-item, .prediction-item {
+    pointer-events: auto !important;
+    cursor: pointer !important;
+    user-select: none;
+  }
+  
+  .music-item:hover, button:hover {
+    opacity: 0.8;
+  }
+`;
+document.head.appendChild(fixStyle);
