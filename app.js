@@ -1013,12 +1013,10 @@ function recommendSkincare(skinType) {
   // 피부 추천 전용 div 사용
 let recommendationDiv = document.getElementById('skincare-recommendation');
 if (!recommendationDiv) {
-  // 요소가 없으면 생성
   recommendationDiv = document.createElement('div');
   recommendationDiv.id = 'skincare-recommendation';
   recommendationDiv.className = 'recommendation-section';
   
-  // 적절한 위치에 삽입 (status 다음)
   const statusDiv = document.getElementById('status');
   statusDiv.parentNode.insertBefore(recommendationDiv, statusDiv.nextSibling);
 }
