@@ -1493,3 +1493,9 @@ skinCareStyles.textContent = `
 
 // 스타일을 head에 추가
 document.head.appendChild(skinCareStyles);
+
+// 전역 함수로 등록
+window.closeSkinTypeModal = closeSkinTypeModal;
+window.selectSkinType = selectSkinType;
+window.showSkinTypeModal = showSkinTypeModal;
+window.searchProducts = searchProducts;
