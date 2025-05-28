@@ -1137,7 +1137,6 @@ function getCategoryEmoji(category) {
   return emojiMap[category] || '🧴';
 }
 
-// 온라인 제품 검색 (구글 검색으로 연결)
 function searchProducts(skinType) {
   // 쿠팡과 올리브영 동시에 열기
   const coupangQuery = `${skinType} 피부 스킨케어`;
