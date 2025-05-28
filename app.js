@@ -1137,8 +1137,8 @@ function getCategoryEmoji(category) {
   return emojiMap[category] || '🧴';
 }
 
+// 쿠팡과 올리브영 동시에 열기
 function searchProducts(skinType) {
-  // 쿠팡과 올리브영 동시에 열기
   const coupangQuery = `${skinType} 피부 스킨케어`;
   const oliveYoungQuery = `${skinType} 피부 스킨케어`;
   
