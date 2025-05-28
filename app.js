@@ -725,4 +725,748 @@ style.textContent = `
     }
   }
 `;
-document.head.appendChild(style);
+
+// 피부 타입별 제품 데이터베이스
+const skinCareProducts = {
+  '지성': {
+    emoji: '💧',
+    description: '기름기가 많은 피부를 위한 제품들',
+    products: [
+      {
+        name: '살리실산 클렌저',
+        category: '세안제',
+        description: '모공 깊숙한 기름기와 각질 제거',
+        price: '15,000원~25,000원',
+        ingredients: '살리실산(BHA), 티트리오일'
+      },
+      {
+        name: '나이아신아마이드 세럼',
+        category: '세럼',
+        description: '모공 축소 및 피지 조절',
+        price: '20,000원~35,000원',
+        ingredients: '나이아신아마이드 5-10%, 아연'
+      },
+      {
+        name: '논코메도제닉 수분크림',
+        category: '보습제',
+        description: '모공을 막지 않는 가벼운 보습',
+        price: '18,000원~30,000원',
+        ingredients: '히알루론산, 세라마이드'
+      }
+    ],
+    tips: ['하루 2회 세안', '기름종이 사용 자제', '과도한 세안은 금물', '논코메도제닉 제품 선택']
+  },
+  '건성': {
+    emoji: '🌵',
+    description: '수분이 부족한 피부를 위한 제품들',
+    products: [
+      {
+        name: '세라마이드 클렌저',
+        category: '세안제',
+        description: '수분을 유지하며 부드럽게 세안',
+        price: '18,000원~28,000원',
+        ingredients: '세라마이드, 글리세린, 스쿠알란'
+      },
+      {
+        name: '히알루론산 세럼',
+        category: '세럼',
+        description: '깊은 수분 공급과 보습막 형성',
+        price: '25,000원~40,000원',
+        ingredients: '저분자 히알루론산, 글리세린'
+      },
+      {
+        name: '리치 모이스처라이저',
+        category: '보습제',
+        description: '진한 질감의 영양 크림',
+        price: '30,000원~50,000원',
+        ingredients: '시어버터, 세라마이드, 콜라겐'
+      }
+    ],
+    tips: ['미지근한 물로 세안', '세안 후 3분 내 보습제 사용', '가습기 사용 권장', '각질 제거는 주 1회만']
+  },
+  '민감성': {
+    emoji: '🌸',
+    description: '자극에 민감한 피부를 위한 순한 제품들',
+    products: [
+      {
+        name: '약산성 클렌저',
+        category: '세안제',
+        description: '자극 없는 순한 pH 균형 세안제',
+        price: '16,000원~26,000원',
+        ingredients: '아미노산 계면활성제, 판테놀'
+      },
+      {
+        name: '센텔라 진정 세럼',
+        category: '세럼',
+        description: '염증 진정 및 피부 장벽 강화',
+        price: '22,000원~38,000원',
+        ingredients: '센텔라 추출물, 판테놀, 베타글루칸'
+      },
+      {
+        name: '무향료 보습크림',
+        category: '보습제',
+        description: '향료 무첨가 저자극 보습제',
+        price: '20,000원~35,000원',
+        ingredients: '세라마이드, 콜로이드 오트밀'
+      }
+    ],
+    tips: ['새 제품 사용 전 패치 테스트', '강한 성분(레티놀, AHA) 피하기', '자외선 차단제 필수', '스트레스 관리 중요']
+  },
+  '복합성': {
+    emoji: '⚖️',
+    description: 'T존은 지성, 볼은 건성인 복합성 피부용 제품들',
+    products: [
+      {
+        name: '젠틀 폼 클렌저',
+        category: '세안제',
+        description: '부위별 차별 케어가 가능한 중성 세안제',
+        price: '17,000원~27,000원',
+        ingredients: '코코일 글루타메이트, 글리세린'
+      },
+      {
+        name: '듀얼 케어 세럼',
+        category: '세럼',
+        description: 'T존과 볼 부위 차별 케어',
+        price: '28,000원~45,000원',
+        ingredients: '나이아신아마이드, 히알루론산'
+      },
+      {
+        name: '밸런싱 로션',
+        category: '보습제',
+        description: '유분과 수분의 균형을 맞춘 제품',
+        price: '25,000원~40,000원',
+        ingredients: '세라마이드, 스쿠알란'
+      }
+    ],
+    tips: ['부위별 다른 제품 사용', 'T존은 가볍게, 볼은 충분히 보습', '일주일에 1-2회 T존만 각질 제거', '계절별 제품 조정']
+  },
+  '트러블': {
+    emoji: '🔴',
+    description: '여드름과 트러블이 있는 피부를 위한 케어 제품들',
+    products: [
+      {
+        name: '살리실산 워시',
+        category: '세안제',
+        description: '모공 속 각질과 세균 제거',
+        price: '18,000원~30,000원',
+        ingredients: '살리실산 0.5%, 티트리오일'
+      },
+      {
+        name: '벤조일 퍼옥사이드 트리트먼트',
+        category: '트리트먼트',
+        description: '여드름균 억제 및 염증 완화',
+        price: '15,000원~25,000원',
+        ingredients: '벤조일 퍼옥사이드 2.5%, 알로에베라'
+      },
+      {
+        name: '논코메도제닉 젤 크림',
+        category: '보습제',
+        description: '모공을 막지 않는 가벼운 젤 타입',
+        price: '20,000원~32,000원',
+        ingredients: '나이아신아마이드, 아연옥사이드'
+      }
+    ],
+    tips: ['절대 손으로 짜지 않기', '베개커버 자주 교체', '유제품과 당분 섭취 줄이기', '충분한 수면과 스트레스 관리']
+  },
+  '정상': {
+    emoji: '😊',
+    description: '건강한 정상 피부를 유지하기 위한 기본 케어 제품들',
+    products: [
+      {
+        name: '마일드 클렌저',
+        category: '세안제',
+        description: '피부 본연의 균형을 유지하는 세안제',
+        price: '15,000원~25,000원',
+        ingredients: '아미노산 계면활성제, 글리세린'
+      },
+      {
+        name: '비타민 C 세럼',
+        category: '세럼',
+        description: '항산화 및 브라이트닝 효과',
+        price: '25,000원~40,000원',
+        ingredients: '비타민C 유도체, 비타민E'
+      },
+      {
+        name: '데일리 모이스처라이저',
+        category: '보습제',
+        description: '매일 사용하기 좋은 가벼운 보습제',
+        price: '20,000원~35,000원',
+        ingredients: '히알루론산, 세라마이드'
+      }
+    ],
+    tips: ['꾸준한 자외선 차단', '주 1-2회 각질 제거', '충분한 수분 섭취', '규칙적인 생활 패턴 유지']
+  }
+};
+
+// 1. 피부 타입 선택 모달 표시 함수
+function showSkinTypeModal() {
+  // 기존 음악 추천 영역 숨기기
+  const musicDiv = document.getElementById('music-recommendation');
+  if (musicDiv) {
+    musicDiv.style.display = 'none';
+  }
+  
+  // 피부 타입 모달 HTML이 없으면 생성
+  let skinModal = document.getElementById('skin-type-modal');
+  if (!skinModal) {
+    skinModal = document.createElement('div');
+    skinModal.id = 'skin-type-modal';
+    skinModal.className = 'skin-modal';
+    document.body.appendChild(skinModal);
+  }
+  
+  // 모달 내용 생성
+  skinModal.innerHTML = `
+    <div class="skin-modal-content">
+      <div class="skin-modal-header">
+        <h2>🎯 피부 타입을 선택해주세요</h2>
+        <button class="close-btn" onclick="closeSkinTypeModal()">×</button>
+      </div>
+      <div class="skin-modal-body">
+        <p>AI가 분석한 결과를 바탕으로 더 정확한 제품을 추천하기 위해<br>현재 피부 상태를 선택해주세요.</p>
+        <div class="skin-type-grid">
+          <button class="skin-type-btn" onclick="selectSkinType('지성')">
+            <span class="skin-emoji">💧</span>
+            <span class="skin-name">지성 피부</span>
+            <span class="skin-desc">기름기가 많고 모공이 큰 편</span>
+          </button>
+          <button class="skin-type-btn" onclick="selectSkinType('건성')">
+            <span class="skin-emoji">🌵</span>
+            <span class="skin-name">건성 피부</span>
+            <span class="skin-desc">건조하고 당기는 느낌</span>
+          </button>
+          <button class="skin-type-btn" onclick="selectSkinType('민감성')">
+            <span class="skin-emoji">🌸</span>
+            <span class="skin-name">민감성 피부</span>
+            <span class="skin-desc">자극에 쉽게 반응</span>
+          </button>
+          <button class="skin-type-btn" onclick="selectSkinType('복합성')">
+            <span class="skin-emoji">⚖️</span>
+            <span class="skin-name">복합성 피부</span>
+            <span class="skin-desc">T존은 지성, 볼은 건성</span>
+          </button>
+          <button class="skin-type-btn" onclick="selectSkinType('트러블')">
+            <span class="skin-emoji">🔴</span>
+            <span class="skin-name">트러블 피부</span>
+            <span class="skin-desc">여드름, 뾰루지가 있음</span>
+          </button>
+          <button class="skin-type-btn" onclick="selectSkinType('정상')">
+            <span class="skin-emoji">😊</span>
+            <span class="skin-name">정상 피부</span>
+            <span class="skin-desc">특별한 문제없이 건강함</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  `;
+  
+  // 모달 표시
+  skinModal.style.display = 'flex';
+  
+  // 모달 외부 클릭 시 닫기
+  skinModal.onclick = function(e) {
+    if (e.target === skinModal) {
+      closeSkinTypeModal();
+    }
+  };
+}
+
+// 2. 피부 타입 선택 처리 함수
+function selectSkinType(type) {
+  console.log('선택된 피부 타입:', type);
+  
+  // 모달 닫기
+  closeSkinTypeModal();
+  
+  // 로딩 표시
+  showLoadingMessage('선택하신 피부 타입에 맞는 제품을 추천하고 있습니다...');
+  
+  // 1초 후 추천 결과 표시 (사용자 경험 향상)
+  setTimeout(() => {
+    recommendSkincare(type);
+  }, 1000);
+}
+
+// 3. 모달 닫기 함수
+function closeSkinTypeModal() {
+  const skinModal = document.getElementById('skin-type-modal');
+  if (skinModal) {
+    skinModal.style.display = 'none';
+  }
+}
+
+// 4. 피부 타입별 제품 추천 함수
+function recommendSkincare(skinType) {
+  console.log('스킨케어 추천 시작:', skinType);
+  
+  // 기존 음악 추천 영역을 스킨케어 추천으로 변경
+  let recommendationDiv = document.getElementById('music-recommendation');
+  if (!recommendationDiv) {
+    // 요소가 없으면 생성
+    recommendationDiv = document.createElement('div');
+    recommendationDiv.id = 'music-recommendation';
+    recommendationDiv.className = 'recommendation-section';
+    
+    // 적절한 위치에 삽입 (status 다음)
+    const statusDiv = document.getElementById('status');
+    statusDiv.parentNode.insertBefore(recommendationDiv, statusDiv.nextSibling);
+  }
+  
+  // 스킨케어 제품 데이터 가져오기
+  const skinData = skinCareProducts[skinType];
+  
+  if (!skinData) {
+    console.error('피부 타입 데이터를 찾을 수 없습니다:', skinType);
+    return;
+  }
+  
+  // 추천 내용 생성
+  let html = `
+    <div class="skincare-recommendation">
+      <div class="skincare-header">
+        <h3>${skinData.emoji} ${skinType} 피부 맞춤 추천</h3>
+        <p class="skincare-description">${skinData.description}</p>
+      </div>
+      
+      <div class="products-section">
+        <h4>🛍️ 추천 제품</h4>
+        <div class="products-grid">
+  `;
+  
+  // 제품 목록 추가
+  skinData.products.forEach((product, index) => {
+    const categoryEmoji = getCategoryEmoji(product.category);
+    html += `
+      <div class="product-card">
+        <div class="product-header">
+          <span class="category-emoji">${categoryEmoji}</span>
+          <div class="product-title">
+            <h5>${product.name}</h5>
+            <span class="product-category">${product.category}</span>
+          </div>
+        </div>
+        <p class="product-description">${product.description}</p>
+        <div class="product-details">
+          <div class="product-price">💰 ${product.price}</div>
+          <div class="product-ingredients">🧪 ${product.ingredients}</div>
+        </div>
+      </div>
+    `;
+  });
+  
+  html += `
+        </div>
+      </div>
+      
+      <div class="tips-section">
+        <h4>💡 ${skinType} 피부 관리 팁</h4>
+        <div class="tips-grid">
+  `;
+  
+  // 관리 팁 추가
+  skinData.tips.forEach((tip, index) => {
+    html += `<div class="tip-item">✓ ${tip}</div>`;
+  });
+  
+  html += `
+        </div>
+      </div>
+      
+      <div class="action-buttons">
+        <button class="retry-btn" onclick="showSkinTypeModal()">
+          🔄 다른 피부 타입 선택
+        </button>
+        <button class="search-btn" onclick="searchProducts('${skinType}')">
+          🔍 온라인에서 제품 찾기
+        </button>
+      </div>
+    </div>
+  `;
+  
+  // 내용 업데이트 및 표시
+  recommendationDiv.innerHTML = html;
+  recommendationDiv.style.display = 'block';
+  
+  // 스크롤 이동 (부드럽게)
+  setTimeout(() => {
+    recommendationDiv.scrollIntoView({ 
+      behavior: 'smooth', 
+      block: 'start' 
+    });
+  }, 100);
+}
+
+// 보조 함수들
+
+// 로딩 메시지 표시
+function showLoadingMessage(message) {
+  let recommendationDiv = document.getElementById('music-recommendation');
+  if (!recommendationDiv) {
+    recommendationDiv = document.createElement('div');
+    recommendationDiv.id = 'music-recommendation';
+    const statusDiv = document.getElementById('status');
+    statusDiv.parentNode.insertBefore(recommendationDiv, statusDiv.nextSibling);
+  }
+  
+  recommendationDiv.innerHTML = `
+    <div class="loading-skincare">
+      <div class="loading-spinner">🔄</div>
+      <p>${message}</p>
+    </div>
+  `;
+  recommendationDiv.style.display = 'block';
+}
+
+// 카테고리별 이모지 반환
+function getCategoryEmoji(category) {
+  const emojiMap = {
+    '세안제': '🧼',
+    '세럼': '💧',
+    '보습제': '🧴',
+    '트리트먼트': '💊',
+    '선크림': '☀️',
+    '마스크': '🎭'
+  };
+  return emojiMap[category] || '🧴';
+}
+
+// 온라인 제품 검색 (구글 검색으로 연결)
+function searchProducts(skinType) {
+  const searchQuery = `${skinType} 피부 스킨케어 제품 추천`;
+  const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(searchQuery)}`;
+  window.open(searchUrl, '_blank');
+}
+
+// 기존 predict 함수 수정 (피부 분석 완료 후 모달 표시)
+// 주의: 기존 predict 함수를 찾아서 이 부분을 추가하세요
+/*
+기존 predict 함수에서 피부 분석 완료 후 다음 코드 추가:
+
+if (currentMode === 'skin') {
+  // 피부 분석 완료 후 피부 타입 선택 모달 표시
+  setTimeout(() => {
+    showSkinTypeModal();
+  }, 1500); // 1.5초 후 모달 표시
+}
+*/
+
+// CSS 스타일 추가
+const skinCareStyles = document.createElement('style');
+skinCareStyles.textContent = `
+  /* 피부 타입 모달 스타일 */
+  .skin-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.3s ease-out;
+  }
+  
+  .skin-modal-content {
+    background: white;
+    padding: 0;
+    border-radius: 15px;
+    max-width: 600px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    animation: slideInUp 0.3s ease-out;
+  }
+  
+  .skin-modal-header {
+    padding: 20px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 15px 15px 0 0;
+  }
+  
+  .skin-modal-header h2 {
+    margin: 0;
+    font-size: 1.3em;
+  }
+  
+  .close-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: white;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+  }
+  
+  .close-btn:hover {
+    background-color: rgba(255,255,255,0.2);
+  }
+  
+  .skin-modal-body {
+    padding: 25px;
+  }
+  
+  .skin-modal-body p {
+    text-align: center;
+    color: #666;
+    margin-bottom: 25px;
+    line-height: 1.5;
+  }
+  
+  .skin-type-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 15px;
+  }
+  
+  .skin-type-btn {
+    background: white;
+    border: 2px solid #e1e5e9;
+    border-radius: 12px;
+    padding: 20px 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    text-align: center;
+  }
+  
+  .skin-type-btn:hover {
+    border-color: #667eea;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+  }
+  
+  .skin-emoji {
+    font-size: 2em;
+    margin-bottom: 5px;
+  }
+  
+  .skin-name {
+    font-weight: bold;
+    color: #333;
+    font-size: 1em;
+  }
+  
+  .skin-desc {
+    font-size: 0.85em;
+    color: #666;
+    line-height: 1.3;
+  }
+  
+  /* 스킨케어 추천 스타일 */
+  .skincare-recommendation {
+    background: #f8f9fa;
+    border-radius: 15px;
+    padding: 25px;
+    margin-top: 20px;
+  }
+  
+  .skincare-header {
+    text-align: center;
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #e1e5e9;
+  }
+  
+  .skincare-header h3 {
+    color: #333;
+    margin: 0 0 10px 0;
+    font-size: 1.4em;
+  }
+  
+  .skincare-description {
+    color: #666;
+    margin: 0;
+    font-style: italic;
+  }
+  
+  .products-section, .tips-section {
+    margin-bottom: 25px;
+  }
+  
+  .products-section h4, .tips-section h4 {
+    color: #333;
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #e1e5e9;
+  }
+  
+  .products-grid {
+    display: grid;
+    gap: 15px;
+  }
+  
+  .product-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease;
+  }
+  
+  .product-card:hover {
+    transform: translateY(-2px);
+  }
+  
+  .product-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  
+  .category-emoji {
+    font-size: 1.5em;
+  }
+  
+  .product-title h5 {
+    margin: 0;
+    color: #333;
+    font-size: 1.1em;
+  }
+  
+  .product-category {
+    color: #666;
+    font-size: 0.85em;
+  }
+  
+  .product-description {
+    color: #555;
+    margin-bottom: 15px;
+    line-height: 1.4;
+  }
+  
+  .product-details {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .product-price, .product-ingredients {
+    font-size: 0.9em;
+    color: #666;
+  }
+  
+  .product-price {
+    font-weight: bold;
+    color: #e74c3c;
+  }
+  
+  .tips-grid {
+    display: grid;
+    gap: 10px;
+  }
+  
+  .tip-item {
+    background: white;
+    padding: 12px 15px;
+    border-radius: 8px;
+    border-left: 4px solid #667eea;
+    color: #333;
+  }
+  
+  .action-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 25px;
+  }
+  
+  .retry-btn, .search-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: transform 0.2s ease;
+  }
+  
+  .retry-btn:hover, .search-btn:hover {
+    transform: translateY(-1px);
+  }
+  
+  .search-btn {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  }
+  
+  .loading-skincare {
+    text-align: center;
+    padding: 40px 20px;
+    background: #f8f9fa;
+    border-radius: 15px;
+    margin-top: 20px;
+  }
+  
+  .loading-spinner {
+    font-size: 2em;
+    animation: spin 1s linear infinite;
+    margin-bottom: 15px;
+  }
+  
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  @keyframes slideInUp {
+    from { 
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to { 
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* 모바일 반응형 */
+  @media (max-width: 768px) {
+    .skin-modal-content {
+      width: 95%;
+      margin: 10px;
+    }
+    
+    .skin-type-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .action-buttons {
+      flex-direction: column;
+    }
+    
+    .products-grid {
+      gap: 12px;
+    }
+    
+    .product-card {
+      padding: 15px;
+    }
+  }
+`;
+
+// 스타일을 head에 추가
+document.head.appendChild(skinCareStyles);
