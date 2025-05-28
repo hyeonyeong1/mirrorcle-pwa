@@ -1261,8 +1261,6 @@ skinCareStyles.textContent = `
     align-items: center;
     justify-content: center;
     transition: background-color 0.2s;
-    -webkit-tap-highlight-color: transparent;
-    touch-action: manipulation;
   }
   
   .close-btn:hover {
@@ -1298,8 +1296,6 @@ skinCareStyles.textContent = `
     align-items: center;
     gap: 8px;
     text-align: center;
-    -webkit-tap-highlight-color: transparent;
-    touch-action: manipulation;
   }
   
   .skin-type-btn:hover {
@@ -1453,8 +1449,6 @@ skinCareStyles.textContent = `
     cursor: pointer;
     font-weight: 500;
     transition: transform 0.2s ease;
-    -webkit-tap-highlight-color: transparent;
-    touch-action: manipulation;
   }
   
   .retry-btn:hover, .search-btn:hover {
