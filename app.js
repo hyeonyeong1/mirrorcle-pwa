@@ -1020,8 +1020,6 @@ if (!recommendationDiv) {
   const statusDiv = document.getElementById('status');
   statusDiv.parentNode.insertBefore(recommendationDiv, statusDiv.nextSibling);
 }
-```
-
   
   // 스킨케어 제품 데이터 가져오기
   const skinData = skinCareProducts[skinType];
