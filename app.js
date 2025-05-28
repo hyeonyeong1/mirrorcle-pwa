@@ -83,7 +83,7 @@ async function initPWA() {
   
   // 앱 설치 완료 감지
   window.addEventListener('appinstalled', (e) => {
-    console.log('앱 설치 완료');
+    console.log('앱 설치를 완료');
     isInstalled = true;
     hideInstallPrompt();
     showToast('Mirrorcle이 성공적으로 설치되었습니다! 🎉');
