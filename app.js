@@ -998,15 +998,39 @@ skinModal.innerHTML = `
   </div>
 
   <style>
+    /* 모달 배경 및 위치 설정 */
+    .skin-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      padding: 20px;
+    }
+
     .skin-modal-content {
       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       border-radius: 24px;
       padding: 0;
-      max-width: 90vw;
-      max-height: 90vh;
-      overflow: hidden;
+      max-width: 600px;
+      width: 100%;
+      max-height: 80vh;
+      overflow-y: auto;
       position: relative;
       box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      transform: scale(0.9);
+      animation: modalAppear 0.3s ease forwards;
+    }
+
+    @keyframes modalAppear {
+      to {
+        transform: scale(1);
+      }
     }
 
     .skin-modal-header {
@@ -1177,9 +1201,13 @@ skinModal.innerHTML = `
 
     /* 모바일 최적화 */
     @media (max-width: 768px) {
+      .skin-modal {
+        padding: 10px;
+      }
+      
       .skin-modal-content {
-        max-width: 95vw;
-        margin: 20px;
+        max-width: 100%;
+        max-height: 85vh;
       }
       
       .skin-modal-header {
