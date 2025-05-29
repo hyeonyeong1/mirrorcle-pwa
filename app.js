@@ -920,50 +920,305 @@ function showSkinTypeModal() {
     document.body.appendChild(skinModal);
   }
   
-  // 모달 내용 생성
-  skinModal.innerHTML = `
-    <div class="skin-modal-content">
-      <div class="skin-modal-header">
-        <h2>🎯 피부 타입을 선택해주세요</h2>
-        <button class="close-btn" onclick="closeSkinTypeModal()">×</button>
-      </div>
-      <div class="skin-modal-body">
-        <p>AI가 분석한 결과를 바탕으로 더 정확한 제품을 추천하기 위해<br>현재 피부 상태를 선택해주세요.</p>
-        <div class="skin-type-grid">
-          <button class="skin-type-btn" onclick="selectSkinType('지성')">
-            <span class="skin-emoji">💧</span>
-            <span class="skin-name">지성 피부</span>
-            <span class="skin-desc">기름기가 많고 모공이 큰 편</span>
-          </button>
-          <button class="skin-type-btn" onclick="selectSkinType('건성')">
-            <span class="skin-emoji">🌵</span>
-            <span class="skin-name">건성 피부</span>
-            <span class="skin-desc">건조하고 당기는 느낌</span>
-          </button>
-          <button class="skin-type-btn" onclick="selectSkinType('민감성')">
-            <span class="skin-emoji">🌸</span>
-            <span class="skin-name">민감성 피부</span>
-            <span class="skin-desc">자극에 쉽게 반응</span>
-          </button>
-          <button class="skin-type-btn" onclick="selectSkinType('복합성')">
-            <span class="skin-emoji">⚖️</span>
-            <span class="skin-name">복합성 피부</span>
-            <span class="skin-desc">T존은 지성, 볼은 건성</span>
-          </button>
-          <button class="skin-type-btn" onclick="selectSkinType('트러블')">
-            <span class="skin-emoji">🔴</span>
-            <span class="skin-name">트러블 피부</span>
-            <span class="skin-desc">여드름, 뾰루지가 있음</span>
-          </button>
-          <button class="skin-type-btn" onclick="selectSkinType('정상')">
-            <span class="skin-emoji">😊</span>
-            <span class="skin-name">정상 피부</span>
-            <span class="skin-desc">특별한 문제없이 건강함</span>
-          </button>
-        </div>
+// 모달 내용 생성
+skinModal.innerHTML = `
+  <div class="skin-modal-content">
+    <div class="skin-modal-header">
+      <h2>✨ 피부 타입을 선택해주세요</h2>
+      <button class="close-btn" onclick="closeSkinTypeModal()">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+    <div class="skin-modal-body">
+      <p class="modal-description">AI 분석 결과를 바탕으로 맞춤형 제품을 추천해드려요</p>
+      <div class="skin-type-grid">
+        <button class="skin-type-card oily" onclick="selectSkinType('지성')">
+          <div class="card-gradient"></div>
+          <div class="card-content">
+            <div class="skin-emoji">💧</div>
+            <h3 class="skin-name">지성 피부</h3>
+            <p class="skin-desc">기름기가 많고<br>모공이 큰 편</p>
+          </div>
+          <div class="card-shine"></div>
+        </button>
+        
+        <button class="skin-type-card dry" onclick="selectSkinType('건성')">
+          <div class="card-gradient"></div>
+          <div class="card-content">
+            <div class="skin-emoji">🌵</div>
+            <h3 class="skin-name">건성 피부</h3>
+            <p class="skin-desc">건조하고<br>당기는 느낌</p>
+          </div>
+          <div class="card-shine"></div>
+        </button>
+        
+        <button class="skin-type-card sensitive" onclick="selectSkinType('민감성')">
+          <div class="card-gradient"></div>
+          <div class="card-content">
+            <div class="skin-emoji">🌸</div>
+            <h3 class="skin-name">민감성 피부</h3>
+            <p class="skin-desc">자극에<br>쉽게 반응</p>
+          </div>
+          <div class="card-shine"></div>
+        </button>
+        
+        <button class="skin-type-card combination" onclick="selectSkinType('복합성')">
+          <div class="card-gradient"></div>
+          <div class="card-content">
+            <div class="skin-emoji">⚖️</div>
+            <h3 class="skin-name">복합성 피부</h3>
+            <p class="skin-desc">T존은 지성<br>볼은 건성</p>
+          </div>
+          <div class="card-shine"></div>
+        </button>
+        
+        <button class="skin-type-card acne" onclick="selectSkinType('트러블')">
+          <div class="card-gradient"></div>
+          <div class="card-content">
+            <div class="skin-emoji">🔴</div>
+            <h3 class="skin-name">트러블 피부</h3>
+            <p class="skin-desc">여드름, 뾰루지가<br>있음</p>
+          </div>
+          <div class="card-shine"></div>
+        </button>
+        
+        <button class="skin-type-card normal" onclick="selectSkinType('정상')">
+          <div class="card-gradient"></div>
+          <div class="card-content">
+            <div class="skin-emoji">😊</div>
+            <h3 class="skin-name">정상 피부</h3>
+            <p class="skin-desc">특별한 문제없이<br>건강함</p>
+          </div>
+          <div class="card-shine"></div>
+        </button>
       </div>
     </div>
-  `;
+  </div>
+
+  <style>
+    .skin-modal-content {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 24px;
+      padding: 0;
+      max-width: 90vw;
+      max-height: 90vh;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    }
+
+    .skin-modal-header {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      padding: 24px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .skin-modal-header h2 {
+      font-size: 24px;
+      font-weight: 700;
+      color: #1a1a2e;
+      margin: 0;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .close-btn {
+      width: 40px;
+      height: 40px;
+      border: none;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      color: #1a1a2e;
+    }
+
+    .close-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: rotate(90deg);
+    }
+
+    .skin-modal-body {
+      padding: 32px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+
+    .modal-description {
+      text-align: center;
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 16px;
+      margin-bottom: 32px;
+      font-weight: 400;
+    }
+
+    .skin-type-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 16px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .skin-type-card {
+      position: relative;
+      border: none;
+      border-radius: 20px;
+      padding: 24px 16px;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      overflow: hidden;
+      min-height: 140px;
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .card-gradient {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      opacity: 0.9;
+      transition: opacity 0.3s ease;
+    }
+
+    .card-shine {
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+      transform: rotate(45deg) translate(-100%, -100%);
+      transition: transform 0.6s ease;
+    }
+
+    .skin-type-card:hover .card-shine {
+      transform: rotate(45deg) translate(100%, 100%);
+    }
+
+    .card-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      color: white;
+    }
+
+    .skin-emoji {
+      font-size: 32px;
+      margin-bottom: 12px;
+      display: block;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+    }
+
+    .skin-name {
+      font-size: 16px;
+      font-weight: 700;
+      margin: 0 0 8px 0;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .skin-desc {
+      font-size: 12px;
+      opacity: 0.9;
+      margin: 0;
+      line-height: 1.4;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    }
+
+    /* 각 피부타입별 그라데이션 */
+    .skin-type-card.oily .card-gradient {
+      background: linear-gradient(135deg, #74b9ff, #0984e3);
+    }
+
+    .skin-type-card.dry .card-gradient {
+      background: linear-gradient(135deg, #fab1a0, #e17055);
+    }
+
+    .skin-type-card.sensitive .card-gradient {
+      background: linear-gradient(135deg, #fd79a8, #e84393);
+    }
+
+    .skin-type-card.combination .card-gradient {
+      background: linear-gradient(135deg, #a29bfe, #6c5ce7);
+    }
+
+    .skin-type-card.acne .card-gradient {
+      background: linear-gradient(135deg, #ff7675, #d63031);
+    }
+
+    .skin-type-card.normal .card-gradient {
+      background: linear-gradient(135deg, #00b894, #00a085);
+    }
+
+    .skin-type-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    .skin-type-card:hover .card-gradient {
+      opacity: 1;
+    }
+
+    .skin-type-card:active {
+      transform: translateY(-4px) scale(0.98);
+    }
+
+    /* 모바일 최적화 */
+    @media (max-width: 768px) {
+      .skin-modal-content {
+        max-width: 95vw;
+        margin: 20px;
+      }
+      
+      .skin-modal-header {
+        padding: 20px 24px;
+      }
+      
+      .skin-modal-header h2 {
+        font-size: 20px;
+      }
+      
+      .skin-modal-body {
+        padding: 24px 20px;
+      }
+      
+      .skin-type-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+      
+      .skin-type-card {
+        min-height: 120px;
+        padding: 20px 12px;
+      }
+      
+      .skin-emoji {
+        font-size: 28px;
+        margin-bottom: 8px;
+      }
+      
+      .skin-name {
+        font-size: 14px;
+      }
+      
+      .skin-desc {
+        font-size: 11px;
+      }
+    }
+  </style>
+`;
   
   // 모달 표시
   skinModal.style.display = 'flex';
