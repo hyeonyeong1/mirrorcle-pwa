@@ -1001,7 +1001,7 @@ skinModal.addEventListener('touchstart', function(e) {
     closeSkinTypeModal();
   }
 });
-}
+
 
 // 2. 피부 타입 선택 처리 함수
 function selectSkinType(type) {
